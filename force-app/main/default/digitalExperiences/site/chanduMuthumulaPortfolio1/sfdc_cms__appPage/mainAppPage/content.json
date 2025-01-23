@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__appPage",
+  "title" : "main",
+  "contentBody" : {
+    "currentThemeId" : "Build_Your_Own_LWR",
+    "headMarkup" : "<title>Chandra Sekhar Reddy Muthumula Portfolio</title>\n\n<!-- branding stylesheets -->\n\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/salesforce-lightning-design-system.min.css?{ versionKey }\"/>\n\n\n\n<link rel=\"preload\" href=\"{ basePath }/assets/fonts/webfonts/SalesforceSans-Light.woff2\" as=\"font\" type=\"font/woff2\" crossorigin=\"anonymous\" fetchPriority=\"low\"/>\n<link rel=\"preload\" href=\"{ basePath }/assets/fonts/webfonts/SalesforceSans-Regular.woff2\" as=\"font\" type=\"font/woff2\" crossorigin=\"anonymous\" fetchPriority=\"low\"/>\n<link rel=\"preload\" href=\"{ basePath }/assets/fonts/webfonts/SalesforceSans-Bold.woff2\" as=\"font\" type=\"font/woff2\" crossorigin=\"anonymous\" fetchPriority=\"low\"/>\n\n<!-- branding stylesheets-->\n\n<link rel=\"stylesheet\" href=\"{ styles/styles.css }\" />\n<link rel=\"stylesheet\" href=\"{ styles/print.css }\" media=\"print\"/>\n\n<style>\n    \n    • interactions-component.webruntimedesign-componentWrapper_componentWrapper {\n    \tmin-height: 0px  !important;\n    }\n    •currency-app .slds-dropdown_fluid {\n    \tmin-width:120px !important;|\n    }\n    .section-content.community_layout-section_section {\n    \tpadding: 0px !important;\n    }\n</style>",
+    "isLockerServiceEnabled" : true,
+    "isRelaxedCSPLevel" : false,
+    "templateName" : "talon-template-byo"
+  },
+  "urlName" : "main"
+}
