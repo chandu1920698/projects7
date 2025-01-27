@@ -1,0 +1,31 @@
+<template>
+    <lightning-record-view-form
+      density="comfy"
+      object-api-name={objectApiName}
+      record-id={recordId}
+    >
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" small-device-size="4" medium-device-size="3">
+                <img src={trailheadRankImg} alt="Trailhead Image">
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="4" medium-device-size="3">
+                <div>
+                    <h3>Badges</h3>
+                    <p>{badges}+</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="4" medium-device-size="3">
+                <div>
+                    <h3>Points</h3>
+                    <p>{points}+</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="4" medium-device-size="3">
+                <div>
+                    <h3>Trails</h3>
+                    <p>{trails}+</p>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-record-view-form>
+</template>

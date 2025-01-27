@@ -1,0 +1,41 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: 16px auto auto 16px;
+    text-align: center;
+    font-family: arial;
+  }
+  
+img {
+    height: 350px;
+}
+
+lightning-carousel lightning-carousel-image {
+    height: 350px;
+}
+  
+  .card .bottom {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card .bottom:hover {
+    opacity: 0.7;
+  }
+
+  .non-clickable {
+    pointer-events: none;
+  }
+  
+  .custom-carousel img {
+    width: 100%; /* Ensure the image takes up the full width of its container */
+    height: 100%; /* Ensure the image takes up the full height of its container */
+    object-fit: cover; /* Scale the image to cover the container while preserving aspect ratio */
+}

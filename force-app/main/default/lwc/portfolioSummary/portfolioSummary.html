@@ -1,0 +1,19 @@
+<template>
+  <template if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+  </template>
+  <lightning-record-view-form
+      density="comfy"
+      object-api-name={objectApiName}
+      record-id={recordId}
+      >
+      <lightning-layout>
+          <lightning-layout-item class="slds-var-p-around_large">
+              <lightning-output-field 
+                  field-name="Summary__c"
+                  variant="label-hidden"
+                  ></lightning-output-field>
+          </lightning-layout-item>
+      </lightning-layout>
+  </lightning-record-view-form>
+</template>

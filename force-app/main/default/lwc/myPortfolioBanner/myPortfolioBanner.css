@@ -1,0 +1,32 @@
+.dummy {
+
+}
+
+.banner {
+    background: #f6c403;
+    min-height: 300px;
+    text-align: center;
+    padding-top: 16px;;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    height: 160px;
+    width: 160px;
+}
+
+.name {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.designation, .location{
+    font-size: 24px;
+    color: #243753;
+}
+
+.social-media-icon {
+    height: 40px;
+    width: 40px;
+    margin: 16px 16px 16px 0px;
+}

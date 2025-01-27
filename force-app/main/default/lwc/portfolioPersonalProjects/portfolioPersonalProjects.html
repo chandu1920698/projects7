@@ -1,0 +1,30 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+
+    <lightning-layout multiple-rows>
+        <template for:each={projectDetails} for:item="project">
+            <lightning-layout-item key={project.projectName}>
+                <div class="card">
+                    <lightning-carousel class="custom-carousel">
+                        <template for:each={project.projectImageUrls} for:item="imageUrl">
+                            <lightning-carousel-image key={imageUrl}
+                                src = {imageUrl}
+                                href = "#"
+                                alternative-text = "Image Text"
+                                class="non-clickable"
+                            >
+                            </lightning-carousel-image>
+                        </template>
+                        
+                    </lightning-carousel>
+                    <div class="bottom">{project.projectName}</div>
+                </div>
+            </lightning-layout-item>
+        </template>
+        
+    </lightning-layout>
+
+    
+</template>

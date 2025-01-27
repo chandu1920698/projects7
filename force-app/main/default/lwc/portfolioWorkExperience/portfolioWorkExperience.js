@@ -1,0 +1,69 @@
+import { LightningElement, wire, api, track } from 'lwc';
+import { getRelatedListRecords } from 'lightning/uiRelatedListApi';
+
+export default class PortfolioWorkExperience extends LightningElement {
+
+    @api recordId;
+    @api isEducation;
+
+    @track showSpinner = true;
+    @track workExperienceList = [];
+
+    connectedCallback() {
+        console.log("PortfolioWorkExperience - recordId => " +  this.recordId);
+    }
+    @wire(getRelatedListRecords, {
+        parentRecordId : '$recordId',
+        relatedListId : 'WorkExperience__r',
+        fields : ['Work_Experience__c.Start_Date__c',
+        'Work_Experience__c.Job_End_Date__c',
+        'Work_Experience__c.Role__c',
+        'Work_Experience__c.Work_Location__c',
+        'Work_Experience__c.Is_Current__c',
+        'Work_Experience__c.Description__c',
+        'Work_Experience__c.Company_Name__c',
+        'Work_Experience__c.Is_Education__c'],
+        // WHERE : "Work_Experience__c.Is_Education__c : $isEducation",
+    })workExperienceHandler({data, error}) {
+        this.showSpinner = true;
+        if(data) {
+            console.log("data -> " + JSON.stringify(data));
+            this.formatWorkExperience(data);
+        } else {
+            console.log("error -> " + JSON.stringify(error));
+        }
+    };
+
+    formatWorkExperience(data) {
+        this.workExperienceList = [...data.records].reverse().map(item => {
+            let id = item.id;
+            const {Start_Date__c, Job_End_Date__c, Role__c, Work_Location__c, Is_Current__c, Description__c, Company_Name__c, Is_Education__c} = item.fields;
+            
+            let jobIsEducation = this.getFieldValue(Is_Education__c);
+            let jobStartDate = this.getFieldValue(Start_Date__c);
+            let jobEndDate = this.getFieldValue(Job_End_Date__c);
+            let jobRole = this.getFieldValue(Role__c);
+            let jobWorkLocation = this.getFieldValue(Work_Location__c);
+            let jobIsCurrent = this.getFieldValue(Is_Current__c);
+            let jobDescription = this.getFieldValue(Description__c);
+            let jobCompnayName = this.getFieldValue(Company_Name__c);
+
+            // console.log(jobIsEducation + " -> " + this.isEducation);
+
+            if(jobIsEducation.toString() == this.isEducation.toString()) {
+                return {id, jobCompnayName, jobDescription, jobStartDate, jobRole, jobEndDate, jobWorkLocation, jobIsCurrent};
+            }
+        });
+        
+        this.workExperienceList = this.workExperienceList.filter(item => item != null);
+        console.log("this.workExperienceList -> " + JSON.stringify(this.workExperienceList));
+        if(this.workExperienceList.length > 0) {
+            this.showSpinner = false;
+        }
+    }
+
+    getFieldValue(data) {
+        return data?.displayValue || data?.value;
+    }
+
+}

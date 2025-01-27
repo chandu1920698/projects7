@@ -1,0 +1,54 @@
+<template>
+    <div class="banner">
+        <img src={portfolioUserPic} alt="" class="profile-pic">
+        <div class="name">{fullName}</div>
+        <div class="designation">{desigationName} at {companyName}</div>
+        <div class="location">{companyLocation}</div>
+
+        <div>
+            <template if:true={linkedInUrl}>
+                <a href={linkedInUrl} target="_blank">
+                    <img src={linkedInIcon} alt="" class="social-media-icon">
+                </a>
+            </template>
+            
+            <template if:true={gitHubUrl}>
+                <a href={gitHubUrl} target="_blank">
+                    <img src={githubIcon} alt="" class="social-media-icon">
+                </a>
+            </template>
+            
+            <template if:true={youtubeUrl}>
+                <a href={youtubeUrl} target="_blank">
+                    <img src={youtubeIcon} alt="" class="social-media-icon">
+                </a>
+            </template>
+
+            <template if:true={trailHeadUrl}>
+                <a href={trailHeadUrl} target="_blank">
+                    <img src={trailheadIcon} alt="" class="social-media-icon">
+                </a>
+            </template>
+
+            <template if:true={leetCodeUrl}>
+                <a href={leetCodeUrl} target="_blank">
+                    <img src={leetCodeIcon} alt="" class="social-media-icon">
+                </a> 
+            </template>
+
+            <template if:true={twitterUrl}>
+                <a href={twitterUrl} target="_blank">
+                    <img src={twitterIcon} alt="" class="social-media-icon">
+                </a> 
+            </template>
+
+            <template if:true={blogUrl}>
+                <a href={blogUrl} target="_blank">
+                    <img src={blogIcon} alt="" class="social-media-icon">
+                </a> 
+            </template>
+        </div>
+    </div>
+
+
+</template>
