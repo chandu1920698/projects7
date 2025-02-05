@@ -1,15 +1,14 @@
 import { LightningElement, wire, api} from 'lwc';
-import PORTFOLIO_PIC from "@salesforce/resourceUrl/MyPortfolioPic";
 import PORTFOLIO_ASSETS from "@salesforce/resourceUrl/PortfolioAssets";
 import {getRecord, getFieldValue} from 'lightning/uiRecordApi';
 import FULL_NAME from '@salesforce/schema/Portfolio__c.FullName__c';
 import COMPANY_NAME from '@salesforce/schema/Portfolio__c.CompanyName__c';
 import DESIGNATION from '@salesforce/schema/Portfolio__c.Designation__c';
 import COMPANY_LOCATION from '@salesforce/schema/Portfolio__c.CompanyLocation__c';
+import PROFILE_PIC from '@salesforce/schema/Portfolio__c.Profile_Pic__c';
 
 export default class MyPortfolioBanner extends LightningElement {
 
-    portfolioUserPic = PORTFOLIO_PIC;
     linkedInIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/linkedin.svg";
     leetCodeIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/leetcode.svg";
     youtubeIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/youtube.svg";
@@ -33,7 +32,7 @@ export default class MyPortfolioBanner extends LightningElement {
     }
 
 
-    @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION]})
+    @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION, PROFILE_PIC]})
     portfolioData;
 
     // @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION]})
@@ -57,6 +56,23 @@ export default class MyPortfolioBanner extends LightningElement {
     }
     get companyLocation() {
         return getFieldValue(this.portfolioData?.data, COMPANY_LOCATION);
+    }
+
+    get profilePicUrl() {
+
+        const htmlString = getFieldValue(this.portfolioData?.data, PROFILE_PIC);
+
+        // Create a DOMParser to parse the string
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+
+        // Find the <img> element
+        const imgElement = doc.querySelector('img');
+
+        // Get the src attribute value
+        let imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+
+        return imageUrl;
     }
 
 }
