@@ -8,7 +8,7 @@
             <lightning-layout-item key={project.projectName}>
                 <div class="card">
                     <lightning-carousel class="custom-carousel">
-                        <template for:each={project.projectImageUrls} for:item="imageUrl">
+                        <template for:each={project.imageUrls} for:item="imageUrl">
                             <lightning-carousel-image key={imageUrl}
                                 src = {imageUrl}
                                 href = "#"
@@ -19,7 +19,12 @@
                         </template>
                         
                     </lightning-carousel>
-                    <a class="slds-button bottom" href={project.projectWebsiteUrl}>{project.projectName}</a>
+
+                    <!-- <template for:each={project.projectImageUrls} for:item="imageUrl">
+                        <img key={imageUrl} src={imageUrl} alt={project.projectName} />
+                    </template> -->
+
+                    <a class="slds-button bottom slds-align_absolute-center" href={project.projectWebsite}>{project.projectName}</a>
                 </div>
             </lightning-layout-item>
         </template>
