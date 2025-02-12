@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.custom-card {
+    max-width: 520px;
+    background: #0b2451;
+    border-radius: 25px;
+    min-width: 370px;
+}
+
+.custom-button, .custom-button:hover, .custom-button:active, .custom-button:visited {
+    background: #f9ba49;
+    color: #0c2451;
+    padding: 12px;
+    font-size: 24px;
+    margin-top: 48px;
+}
+
+.baseline {
+    align-items: baseline;
+    
+}
