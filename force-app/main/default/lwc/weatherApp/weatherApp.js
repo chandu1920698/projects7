@@ -2,7 +2,7 @@ import { api, LightningElement } from 'lwc';
 import WEATHER_ICONS from '@salesforce/resourceUrl/weatherAppIcons';
 import getWeatherDetails from '@salesforce/apex/WeatherAppController.getWeatherDetails';
 
-const API_KEY = 'bc312bd5364e58f3811e225c6e5bc398';
+
 
 export default class WeatherApp extends LightningElement {
 
@@ -18,7 +18,7 @@ export default class WeatherApp extends LightningElement {
     hazeIcon = WEATHER_ICONS + '/weatherAppIcons/haze.svg';
 
     cityName = '';
-    apiKey = API_KEY;
+    // apiKey = API_KEY;
     loadingText = '';
     isError = false;
     response;
