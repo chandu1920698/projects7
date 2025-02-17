@@ -16,7 +16,7 @@ public with sharing class ProjectsControllerClass {
                 List<Project__c> projectsList = [
                     SELECT Id, Name, Project_Website__c, Description__c 
                     FROM Project__c 
-                    WHERE Portfolio__c = :portfolioRecordId
+                    WHERE Portfolio__c = :portfolioRecordId ORDER BY CreatedDate DESC
                 ];
 
                 if (!projectsList.isEmpty()) {
