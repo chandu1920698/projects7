@@ -47,11 +47,13 @@ export default class PortfolioWorkExperience extends LightningElement {
             let jobIsCurrent = this.getFieldValue(Is_Current__c);
             let jobDescription = this.getFieldValue(Description__c);
             let jobCompnayName = this.getFieldValue(Company_Name__c);
+            let isShowExperience = true;
+            let dropdownClass = 'slds-timeline__item_expandable slds-timeline__item_task slds-is-open';
 
             // console.log(jobIsEducation + " -> " + this.isEducation);
 
             if(jobIsEducation.toString() == this.isEducation.toString()) {
-                return {id, jobCompnayName, jobDescription, jobStartDate, jobRole, jobEndDate, jobWorkLocation, jobIsCurrent};
+                return {id, jobCompnayName, jobDescription, jobStartDate, jobRole, jobEndDate, jobWorkLocation, jobIsCurrent, isShowExperience, dropdownClass};
             }
         });
         
@@ -60,6 +62,22 @@ export default class PortfolioWorkExperience extends LightningElement {
         if(this.workExperienceList.length > 0) {
             this.showSpinner = false;
         }
+    }
+
+    handleShowExperienceClick(event) {
+        let experienceId = event.currentTarget.dataset.id;
+        console.log("experienceId => " + event.currentTarget.dataset.id);
+        
+        this.workExperienceList.forEach(experience => {
+            if(experience.id == experienceId) {
+                experience.isShowExperience = !experience.isShowExperience;
+                if(experience.isShowExperience) {
+                    experience.dropdownClass = 'slds-timeline__item_expandable slds-timeline__item_task slds-is-open';
+                } else {
+                    experience.dropdownClass = 'slds-timeline__item_expandable slds-timeline__item_task slds-is-close';
+                }
+            }
+        });
     }
 
     getFieldValue(data) {
