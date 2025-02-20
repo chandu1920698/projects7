@@ -30,3 +30,9 @@
     width: 40px;
     margin: 16px 16px 16px 0px;
 }
+
+.totalViewsClass {
+    font-size: 24px;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out;
+}

@@ -1,11 +1,13 @@
-import { LightningElement, wire, api} from 'lwc';
+import { LightningElement, wire, api, track} from 'lwc';
 import PORTFOLIO_ASSETS from "@salesforce/resourceUrl/PortfolioAssets";
 import {getRecord, getFieldValue} from 'lightning/uiRecordApi';
 import FULL_NAME from '@salesforce/schema/Portfolio__c.FullName__c';
 import COMPANY_NAME from '@salesforce/schema/Portfolio__c.CompanyName__c';
 import DESIGNATION from '@salesforce/schema/Portfolio__c.Designation__c';
+import TOTAL_VIEWS from '@salesforce/schema/Portfolio__c.Total_Views__c';
 import COMPANY_LOCATION from '@salesforce/schema/Portfolio__c.CompanyLocation__c';
 import PROFILE_PIC from '@salesforce/schema/Portfolio__c.Profile_Pic__c';
+import updatePortfolioTotalViews from '@salesforce/apex/PortfolioController.updatePortfolioTotalViews';
 
 export default class MyPortfolioBanner extends LightningElement {
 
@@ -16,6 +18,9 @@ export default class MyPortfolioBanner extends LightningElement {
     trailheadIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/trailhead1.svg";
     twitterIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/twitter.svg";
     blogIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/blog.svg";
+
+    renderedCallbackCheck = false;
+    @track totalViewsCounter = 0;
 
     @api recordId //= 'a00WU00000YLqBJYA1';
     @api linkedInUrl //= "https://www.linkedin.com/in/chandra-sekhar-reddy-muthumula-125797188/";
@@ -32,7 +37,7 @@ export default class MyPortfolioBanner extends LightningElement {
     }
 
 
-    @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION, PROFILE_PIC]})
+    @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION, PROFILE_PIC, TOTAL_VIEWS]})
     portfolioData;
 
     // @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION]})
@@ -75,4 +80,29 @@ export default class MyPortfolioBanner extends LightningElement {
         return imageUrl;
     }
 
+    renderedCallback() {
+        let totalViewsValue = getFieldValue(this.portfolioData?.data, TOTAL_VIEWS);
+        console.log("totalViewsValue -> " + totalViewsValue);
+        if(totalViewsValue != undefined && !this.renderedCallbackCheck) {
+            totalViewsValue++;
+            this.renderedCallbackCheck = true;
+            updatePortfolioTotalViews({recordId : this.recordId})
+            .then(response => {
+                console.log("updatePortfolioTotalViews -> " + JSON.stringify(response));
+            }).catch(error => {
+                console.log("Error updatePortfolioTotalViews -> " + error);
+            });
+
+            let count = 1;
+            const intervalId = setInterval(() => {
+                console.log(`Interval running... Count: ${count + 1}`);
+                this.totalViewsCounter = count++;
+                if (this.totalViewsCounter >= totalViewsValue) {
+                    clearInterval(intervalId); // Stops the interval
+                    console.log("Interval stopped.");
+                    return;
+                }
+            }, 10); 
+        }
+    }
 }
