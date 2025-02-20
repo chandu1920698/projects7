@@ -14,7 +14,7 @@ public with sharing class ProjectsControllerClass {
             if (portfolioRecordId != null && portfolioRecordId != '') {
                 // Step 1: Fetch Projects
                 List<Project__c> projectsList = [
-                    SELECT Id, Name, Project_Website__c, Description__c 
+                    SELECT Id, Name, Project_Website__c, Description__c, CreatedDate
                     FROM Project__c 
                     WHERE Portfolio__c = :portfolioRecordId ORDER BY CreatedDate DESC
                 ];
@@ -75,7 +75,8 @@ public with sharing class ProjectsControllerClass {
                                 project.Name, 
                                 project.Project_Website__c, 
                                 project.Description__c, 
-                                imageUrls
+                                imageUrls, 
+                                project.createdDate
                             ));
                         }
                     }
@@ -96,12 +97,15 @@ public with sharing class ProjectsControllerClass {
         public String projectDescription { get; set; }
         @AuraEnabled
         public List<String> projectImageUrls { get; set; }
+        @AuraEnabled
+        public DateTime createdDateTime { get; set; }
 
-        public ProjectDetailsWrapper(String projectName, String projectWebsiteUrl, String projectDescription, List<String> projectImageUrls) {
+        public ProjectDetailsWrapper(String projectName, String projectWebsiteUrl, String projectDescription, List<String> projectImageUrls, DateTime createdDateTime) {
             this.projectName = projectName;
             this.projectWebsiteUrl = projectWebsiteUrl;
             this.projectDescription = projectDescription;
             this.projectImageUrls = projectImageUrls;
+            this.createdDateTime = createdDateTime;
         }
     }
 }

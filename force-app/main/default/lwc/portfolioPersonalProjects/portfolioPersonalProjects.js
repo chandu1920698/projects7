@@ -19,6 +19,7 @@ export default class PortfolioPersonalProjects extends LightningElement {
         fields : ['Project__c.Project_Website__c',
         'Project__c.Name',
         'Project__c.Description__c',
+        'Project__c.CreatedDate',
         'Project__c.Image_1__c',
         'Project__c.Image_2__c',
         'Project__c.Image_3__c',
@@ -29,12 +30,13 @@ export default class PortfolioPersonalProjects extends LightningElement {
         if(data) {
             console.log("data projectDetails -> " + JSON.stringify(data));
             this.projectDetails = data.records.map(item => {
-                const {Name, Project_Website__c, Description__c, Image_1__c, Image_2__c, Image_3__c, Image_4__c, Image_5__c} = item.fields;
+                const {Name, Project_Website__c, Description__c, CreatedDate, Image_1__c, Image_2__c, Image_3__c, Image_4__c, Image_5__c} = item.fields;
 
                 let projectId = item.id;
                 let projectName = this.getFieldData(Name);
                 let projectDescription = this.getFieldData(Description__c);
                 let projectWebsite = this.getFieldData(Project_Website__c);
+                let createdDateTime = this.getDateTime(this.getFieldData(CreatedDate));
                 let imageUrls = [];
                 let projectImage1 = this.getProjectImage(this.getFieldData(Image_1__c));
                 if(projectImage1 != null) {
@@ -57,9 +59,13 @@ export default class PortfolioPersonalProjects extends LightningElement {
                     imageUrls.push(projectImage5);
                 }
 
-                return {projectId, projectName, projectDescription, projectWebsite, imageUrls};
+                return {projectId, projectName, projectDescription, projectWebsite, imageUrls, createdDateTime};
             });
 
+            this.projectDetails.sort((a, b) => new Date(a.createdDateTime) - new Date(b.createdDateTime));
+
+            this.projectDetails = this.projectDetails.reverse();
+            
             console.log("this.projectDetails -> " + JSON.stringify(this.projectDetails));
 
             if(this.projectDetails.length != 0) {
@@ -90,5 +96,28 @@ export default class PortfolioPersonalProjects extends LightningElement {
 
     getFieldData(data) {
         return data?.displayValue || data?.value;
+    }
+
+    getDateTime(dateString) {
+        // Split the string into parts
+        const [datePart, timePart] = dateString.split(", ");
+        const [day, month, year] = datePart.split("/");
+        const [time, modifier] = timePart.split(" ");
+        let [hours, minutes] = time.split(":");
+
+        // Convert 12-hour format to 24-hour format
+        if (modifier === "pm" && hours !== "12") {
+            hours = parseInt(hours, 10) + 12;
+        }
+        if (modifier === "am" && hours === "12") {
+            hours = "00"; // Midnight case
+        }
+
+        // Create the Date object
+        const dateObject = new Date(`${year}-${month}-${day}T${hours}:${minutes}:00`);
+
+        console.log(dateObject);
+
+        return dateObject;
     }
 }
