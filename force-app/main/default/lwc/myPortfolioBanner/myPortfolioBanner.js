@@ -82,7 +82,7 @@ export default class MyPortfolioBanner extends LightningElement {
 
     renderedCallback() {
         let totalViewsValue = getFieldValue(this.portfolioData?.data, TOTAL_VIEWS);
-        console.log("totalViewsValue -> " + totalViewsValue);
+        // console.log("totalViewsValue -> " + totalViewsValue);
         if(totalViewsValue != undefined && !this.renderedCallbackCheck) {
             totalViewsValue++;
             this.renderedCallbackCheck = true;
@@ -95,7 +95,7 @@ export default class MyPortfolioBanner extends LightningElement {
 
             let count = 1;
             const intervalId = setInterval(() => {
-                console.log(`Interval running... Count: ${count + 1}`);
+                // console.log(`Interval running... Count: ${count + 1}`);
                 this.totalViewsCounter = count++;
                 if (this.totalViewsCounter >= totalViewsValue) {
                     clearInterval(intervalId); // Stops the interval
