@@ -5,10 +5,17 @@
     <targets>
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
+        <target>lightning__HomePage</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightningCommunity__Default">
             <property name="recordId" label="Record Id" type="String"></property>
         </targetConfig>
+        <targetConfig targets="lightning__HomePage">
+            <property name="recordId" label="Record Id" type="String"></property>
+        </targetConfig>
     </targetConfigs>
+    <capabilities>
+        <capability>lightning__dynamicComponent</capability>
+  </capabilities>
 </LightningComponentBundle>
