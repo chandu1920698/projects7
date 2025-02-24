@@ -5,7 +5,7 @@
         <div class="designation">{desigationName} at {companyName}</div>
         <div class="location">{companyLocation}</div>
 
-        <div>
+        <div class="icon-css">
             <template if:true={linkedInUrl}>
                 <a href={linkedInUrl} target="_blank">
                     <img src={linkedInIcon} alt="" class="social-media-icon">
@@ -49,7 +49,6 @@
             </template>
         </div>
         <div class="totalViewsClass">
-            <!-- Total Views : {totalViewsCounter} -->
             Page Impressions : {totalViewsCounter}
         </div>
     </div>

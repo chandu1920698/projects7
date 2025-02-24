@@ -13,7 +13,7 @@ export default class PortfolioPathWrapper extends LightningElement {
     @track sldsPathValues = [
         {
             pItem : {
-                label : 'Summary'
+                label : 'About Me' // Summary renamed as About Me
             },
             classList : 'slds-path__item slds-is-current slds-is-active', 
             pathIndex : 0
@@ -140,7 +140,7 @@ export default class PortfolioPathWrapper extends LightningElement {
             this.showCertifications = false;
             this.showOthers = false;
 
-            if(selectedtabName == 'Summary') {
+            if(selectedtabName == 'About Me') {
                 this.showSummary = true;
             } else if(selectedtabName == 'Personal Projects') {
                 this.showPersonalProjects = true;
@@ -155,6 +155,25 @@ export default class PortfolioPathWrapper extends LightningElement {
             } else if(selectedtabName == 'Others') {
                 this.showOthers = true;
             }
+        }
+    }
+
+    handleMobileAccordiantabClick(event) {
+        let pathLabel = event.currentTarget.label;
+        let className = event.currentTarget.classList.value.split(' ')[0];
+        if(pathLabel) {
+            this.handleSelectPathHelperToShowTemplates(pathLabel);
+            this.sldsPathValues.forEach(path => {
+                if(pathLabel == path.pItem.label) {
+                    this.currentPathIndex = path.pathIndex;
+                }
+            });
+
+            setTimeout(() => { 
+                const scrollToElement = this.template.querySelector(`.${className}`);
+                console.log("scrollToElement -> " + JSON.stringify(scrollToElement));
+                scrollToElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 1000);
         }
     }
 }

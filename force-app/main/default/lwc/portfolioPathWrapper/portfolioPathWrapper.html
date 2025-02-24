@@ -12,7 +12,7 @@
                                         <template for:each={sldsPathValues} for:item="item">
                                             <li data-value={item.pItem.label} onclick={handleSelectPath} key={item.pathIndex} class={item.classList} role="presentation">
                                                 <div class="slds-path__link" id={item.pItem.label}>
-                                                    <span class="slds-path__title">{item.pItem.label}</span>
+                                                    <span class="slds-path__title path-cusrsor">{item.pItem.label}</span>
                                                 </div>
                                             </li>
                                         </template>
@@ -36,7 +36,6 @@
                     ></c-portfolio-summary>
                 </template>
             </template>
-
             <template lwc:if={showPersonalProjects}>
                 <template lwc:if={recordId}>
                     <c-portfolio-personal-projects
@@ -44,7 +43,6 @@
                     ></c-portfolio-personal-projects>
                 </template>
             </template>
-
             <template lwc:if={showWorkExperience}>
                 <template lwc:if={recordId}>
                     <c-portfolio-work-experience
@@ -53,7 +51,6 @@
                     ></c-portfolio-work-experience>
                 </template>
             </template>
-
             <template lwc:if={showSkills}>
                 <template lwc:if={recordId}>
                     <c-portfolio-skills
@@ -86,8 +83,8 @@
     </div>
 	
     <div class="accordion-wrapper show-accordion-on-mobile-view">
-        <lightning-accordion allow-multiple-sections-open>
-            <lightning-accordion-section name="Summary" label="Summary">
+        <lightning-accordion>
+            <lightning-accordion-section name="About Me" label="About Me" onclick={handleMobileAccordiantabClick} class="About Me">
                 <template lwc:if={showSummary}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
@@ -99,7 +96,7 @@
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Personal Projects" label="Personal Projects">
+            <lightning-accordion-section name="Personal Projects" label="Personal Projects" onclick={handleMobileAccordiantabClick} class="Personal-Projects">
                 <template lwc:if={showPersonalProjects}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
@@ -110,7 +107,7 @@
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Work Experience" label="Work Experience">
+            <lightning-accordion-section name="Work Experience" label="Work Experience" onclick={handleMobileAccordiantabClick} class="Work-Experience">
                 <template lwc:if={showWorkExperience}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
@@ -122,7 +119,7 @@
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Skills" label="Skills">
+            <lightning-accordion-section name="Skills" label="Skills" onclick={handleMobileAccordiantabClick} class="Skills">
                 <template lwc:if={showSkills}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
@@ -133,7 +130,7 @@
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Education" label="Education">
+            <lightning-accordion-section name="Education" label="Education" onclick={handleMobileAccordiantabClick} class="Education">
                 <template lwc:if={showEducation}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
@@ -145,7 +142,7 @@
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Certifications" label="Certifications">
+            <lightning-accordion-section name="Certifications" label="Certifications" onclick={handleMobileAccordiantabClick} class="Certifications">
                 <template lwc:if={showCertifications}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">

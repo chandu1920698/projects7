@@ -15,6 +15,10 @@
     display: none;
 }
 
+.path-cusrsor {
+    cursor: pointer;
+}
+
 @media (max-width: 1024px) {
     .show-tabs-on-desktop-view {
         display: none;

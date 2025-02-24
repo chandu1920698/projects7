@@ -21,14 +21,14 @@ lightning-carousel lightning-carousel-image {
     color: white;
     background-color: #000;
     text-align: center;
-    cursor: pointer;
+    /* cursor: pointer; */
     width: 100%;
     font-size: 18px;
   }
   
-  .card .bottom:hover {
+  /* .card .bottom:hover {
     opacity: 0.7;
-  }
+  } */
 
   .non-clickable {
     pointer-events: none;
@@ -38,4 +38,12 @@ lightning-carousel lightning-carousel-image {
     width: 100%; /* Ensure the image takes up the full width of its container */
     height: 100%; /* Ensure the image takes up the full height of its container */
     object-fit: cover; /* Scale the image to cover the container while preserving aspect ratio */
+}
+
+.button {
+
+}
+
+.open-app {
+  cursor: pointer;
 }

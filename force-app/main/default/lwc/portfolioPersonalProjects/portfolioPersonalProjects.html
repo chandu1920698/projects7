@@ -19,7 +19,13 @@
                         </template>
                         
                     </lightning-carousel>
-                    <a class="slds-button bottom slds-align_absolute-center" href={project.projectWebsite}>{project.projectName}</a>
+                    <div class="slds-button bottom slds-align_absolute-center">{project.projectName}
+                        <span>
+                            <a href={project.projectWebsite}>
+                                <lightning-icon icon-name='utility:new_window' alternative-text='new_window' size='x-small' title='Open in new window' class="slds-p-left_x-small slds-p-bottom_x-small open-app"></lightning-icon>
+                            </a>
+                        </span>
+                    </div>
                 </div>
             </lightning-layout-item>
         </template>
