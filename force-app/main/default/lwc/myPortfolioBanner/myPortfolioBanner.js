@@ -21,6 +21,7 @@ export default class MyPortfolioBanner extends LightningElement {
 
     renderedCallbackCheck = false;
     @track totalViewsCounter = 0;
+    fullName = '';
 
     @api recordId //= 'a00WU00000YLqBJYA1';
     @api linkedInUrl //= "https://www.linkedin.com/in/chandra-sekhar-reddy-muthumula-125797188/";
@@ -36,6 +37,24 @@ export default class MyPortfolioBanner extends LightningElement {
         console.log("this.recordId -> " + JSON.stringify(this.recordId));
     }
 
+    applyAnimationDelayToIcons() {
+        try {
+            const iconsList = this.template.querySelectorAll('.icon');
+            let randomNumbers = new Set();
+            iconsList.forEach((icon, index) => {
+                console.log("icon -> " + JSON.stringify(icon));
+                let randomNumber = Math.floor(Math.random() * iconsList.length);
+                while(randomNumbers.has(randomNumber)) {
+                    randomNumber = Math.floor(Math.random() * iconsList.length);
+                }
+                randomNumbers.add(randomNumber);
+                icon.style = `animation-delay: ${randomNumber/2}s;`;
+            });
+        } catch (error) {
+            console.log("Error icon.style.animationDelay -> " + error);
+        }
+    }
+
 
     @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION, PROFILE_PIC, TOTAL_VIEWS]})
     portfolioData;
@@ -49,10 +68,28 @@ export default class MyPortfolioBanner extends LightningElement {
     //     }
     // }
 
-    get fullName() {
-        // console.log("this.portfolioData -> " + JSON.stringify(this.portfolioData));
-        return getFieldValue(this.portfolioData?.data, FULL_NAME);
-    }
+    // get fullName() {
+    //     // console.log("this.portfolioData -> " + JSON.stringify(this.portfolioData));
+    //     let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
+
+    //     console.log("tempFullName -> " + JSON.stringify(tempFullName));
+
+    //     if(tempFullName != undefined) {
+    //         try {
+    //             let subStringLength = 1;
+    //             const intervalId = setInterval(() => {
+    //                 // console.log(`Interval running... Count: ${count + 1}`);
+    //                 if (subStringLength == tempFullName.length) {
+    //                     clearInterval(intervalId); // Stops the interval
+    //                     console.log("Interval stopped.");
+    //                     return tempFullName.substring(0, subStringLength++);
+    //                 }
+    //             }, 10); 
+    //         } catch(error) {
+    //             console.log('Error in fullName -> ' + error);
+    //         }
+    //     }
+    // }
     get companyName() {
         return getFieldValue(this.portfolioData?.data, COMPANY_NAME);
     }
@@ -83,7 +120,16 @@ export default class MyPortfolioBanner extends LightningElement {
     renderedCallback() {
         let totalViewsValue = getFieldValue(this.portfolioData?.data, TOTAL_VIEWS);
         // console.log("totalViewsValue -> " + totalViewsValue);
-        if(totalViewsValue != undefined && !this.renderedCallbackCheck) {
+
+        let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
+        console.log("tempFullName -> " + JSON.stringify(tempFullName));
+
+        if(totalViewsValue != undefined && tempFullName != undefined && !this.renderedCallbackCheck) {
+            // Scroll to the top
+            const portfolioBanner = this.template.querySelector('.banner');
+            console.log('portfolioBanner-> ' + JSON.stringify(portfolioBanner));
+            portfolioBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
             totalViewsValue++;
             this.renderedCallbackCheck = true;
             updatePortfolioTotalViews({recordId : this.recordId})
@@ -94,15 +140,27 @@ export default class MyPortfolioBanner extends LightningElement {
             });
 
             let count = 1;
-            const intervalId = setInterval(() => {
+            const pageImpressionIntervalId = setInterval(() => {
                 // console.log(`Interval running... Count: ${count + 1}`);
                 this.totalViewsCounter = count++;
                 if (this.totalViewsCounter >= totalViewsValue) {
-                    clearInterval(intervalId); // Stops the interval
+                    clearInterval(pageImpressionIntervalId); // Stops the interval
                     console.log("Interval stopped.");
                     return;
                 }
             }, 10); 
+
+            let subStringLength = 1;
+            const fullNameIntervalId = setInterval(() => {
+                this.fullName = tempFullName.substring(0, subStringLength++);
+                if (subStringLength > tempFullName.length) {
+                    clearInterval(fullNameIntervalId); // Stops the interval
+                    console.log("Interval stopped.");
+                    return;
+                }
+            }, 50); 
+
+            this.applyAnimationDelayToIcons();
         }
     }
 }

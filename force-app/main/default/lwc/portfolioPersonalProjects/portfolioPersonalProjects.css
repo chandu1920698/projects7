@@ -1,9 +1,10 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 320px;
+    max-width: 300px;
     margin: 16px;
     text-align: center;
     font-family: arial;
+    background: #fff;
   }
   
 img {
@@ -46,4 +47,14 @@ lightning-carousel lightning-carousel-image {
 
 .open-app {
   cursor: pointer;
+}
+
+.project-container {
+    /* height: 100%;
+    border: 1px solid #c9c9c9;
+    border-radius: 8px; */
+}
+
+.spinner-center {
+  top: 50%
 }

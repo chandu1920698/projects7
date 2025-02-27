@@ -1,9 +1,13 @@
 import { LightningElement, wire, api, track } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
-import TECH_SKILLS_FIELD from '@salesforce/schema/Portfolio__c.Technical_Skills__c';
-import SOFT_SKILLS_FIELD from '@salesforce/schema/Portfolio__c.Soft_Skills__c';
-import SOFTWARE_FIELD from '@salesforce/schema/Portfolio__c.Software_Tools__c';
-import METHODOLOGIES_FIELD from '@salesforce/schema/Portfolio__c.Software_Development_Methodologies__c';
+import TECH_SKILLS from '@salesforce/schema/Portfolio__c.Technical_Skills__c';
+import SOFT_SKILLS from '@salesforce/schema/Portfolio__c.Soft_Skills__c';
+import SOFTWARE from '@salesforce/schema/Portfolio__c.Software_Tools__c';
+import METHODOLOGIES from '@salesforce/schema/Portfolio__c.Software_Development_Methodologies__c';
+import DATABASE from '@salesforce/schema/Portfolio__c.Databases__c';
+import OPERATING_SYSTEMS from '@salesforce/schema/Portfolio__c.Operating_Systems__c';
+import PROGRAMMING_LANGUAGES from '@salesforce/schema/Portfolio__c.Programming_Languages__c';
+
 
 export default class PortfolioSkills extends LightningElement {
     @api recordId;
@@ -12,12 +16,15 @@ export default class PortfolioSkills extends LightningElement {
     softSkills =[];
     methodologies=[];
     toolsSkills = [];
+    databases = [];
+    operatingSystems = [];
+    programmingLanguages = [];
 
     @track showSpinner = true;
 
     @wire(getRecord, {
         recordId:'$recordId',
-        fields:[TECH_SKILLS_FIELD, SOFT_SKILLS_FIELD, SOFTWARE_FIELD, METHODOLOGIES_FIELD]
+        fields:[TECH_SKILLS, SOFT_SKILLS, SOFTWARE, METHODOLOGIES, DATABASE, OPERATING_SYSTEMS, PROGRAMMING_LANGUAGES]
     })skillHandler({data, error}){
         this.showSpinner = true;
         if(data){
@@ -30,18 +37,24 @@ export default class PortfolioSkills extends LightningElement {
     }
 
     formatSkills(data){
-        const {Soft_Skills__c, Software_Development_Methodologies__c, Software_Tools__c,Technical_Skills__c} = data.fields;
+        const {Soft_Skills__c, Software_Development_Methodologies__c, Software_Tools__c,Technical_Skills__c, Databases__c, Operating_Systems__c, Programming_Languages__c} = data.fields;
         this.techSkills = Technical_Skills__c?.value ? Technical_Skills__c.value.split(','):null;
         this.softSkills = Soft_Skills__c?.value ? Soft_Skills__c.value.split(','):null;
         this.methodologies = Software_Development_Methodologies__c?.value ? Software_Development_Methodologies__c.value.split(','): null;
         this.toolsSkills = Software_Tools__c?.value ? Software_Tools__c.value.split(','):null;
+        this.databases = Databases__c?.value ? Databases__c.value.split(','):null;
+        this.operatingSystems = Operating_Systems__c?.value ? Operating_Systems__c.value.split(','):null;
+        this.programmingLanguages = Programming_Languages__c?.value ? Programming_Languages__c.value.split(','):null;
 
         console.log("this.techSkills -> ", JSON.stringify(this.techSkills));
         console.log("this.softSkills -> ", JSON.stringify(this.softSkills));
         console.log("this.methodologies -> ", JSON.stringify(this.methodologies));
         console.log("this.toolsSkills -> ", JSON.stringify(this.toolsSkills));
+        console.log("this.databases -> ", JSON.stringify(this.databases));
+        console.log("this.operatingSystems -> ", JSON.stringify(this.operatingSystems));
+        console.log("this.programmingLanguages -> ", JSON.stringify(this.programmingLanguages));
 
-        if(this.techSkills || this.softSkills || this.methodologies || this.toolsSkills) {
+        if(this.techSkills || this.softSkills || this.methodologies || this.toolsSkills || this.databases || this.operatingSystems || this.programmingLanguages) {
             this.showSpinner = false;
         }
         

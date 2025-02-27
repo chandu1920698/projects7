@@ -35,3 +35,7 @@
     border-radius: 5px;
     font-size: 18px;
 }
+
+.spinner-center {
+  top: 50%;
+}
