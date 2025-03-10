@@ -1,0 +1,126 @@
+<template>
+    <div class="show-on-desktop-view">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="center-container">
+                    <div class="contact-me-text">
+                        <div>
+                            Let’s Connect! 🤝
+                        </div>
+                        <div>
+                            Hey there! I’m thrilled that you stopped by my portfolio. Whether you have an exciting project in mind, a collaboration opportunity, or just want to say hello—I’d love to hear from you!
+                            Drop me a message, and I’ll get back to you as soon as possible. Let’s transform ideas into reality, create something incredible together, and maybe even spark the next big innovation!
+                        </div>
+                        <div>
+                            Your thoughts, feedback, and questions are always welcome. Don’t hesitate to reach out—I look forward to connecting with you!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div class="c-container center-container">
+                    <div class="container">
+                        <form onsubmit={handleSendMessage}>
+                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                <div class="slds-form-element__control">
+                                    <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                <div class="slds-form-element__control">
+                                    <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                <div class="slds-form-element__control">
+                                    <lightning-input-rich-text
+                                        value={message}
+                                        onchange={handleInputChange}
+                                        placeholder="Your Message"
+                                        name="message">
+                                    </lightning-input-rich-text>
+                                </div>
+                            </div>
+                            <div class="custom-button">
+                                <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="show-on-mobile-view">
+        <div class="slds-grid slds-grid_vertical slds-gutters">
+            <div class="slds-col">
+                <div class="center-container">
+                    <div class="contact-me-text">
+                        <div>
+                            Get in Touch
+                        </div>
+                        <div>
+                            Please fill out the form below, and I will get back to you as soon as possible. Whether you are interested in discussing new opportunities, collaborations, or need more information about my work, don’t hesitate to send a message.
+                        </div>
+                        <div>
+                            Thank you for visiting my portfolio! If you have any questions, feedback, or just want to say hello, feel free to reach out. I’d love to hear from you.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col">
+                <div class="c-container center-container">
+                    <div class="container">
+                        <form onsubmit={handleSendMessage}>
+                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                <div class="slds-form-element__control">
+                                    <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                <div class="slds-form-element__control">
+                                    <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                <div class="slds-form-element__control">
+                                    <lightning-input-rich-text
+                                        value={message}
+                                        onchange={handleInputChange}
+                                        placeholder="Your Message"
+                                        name="message">
+                                    </lightning-input-rich-text>
+                                </div>
+                            </div>
+                            <div class="custom-button">
+                                <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-labelledby="modal-heading-01" aria-modal="true">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <slot name="headercontent">
+                        <h2 class="modal-title">👋 {messageHeaderGreeting} !</h2>
+                    </slot>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <slot name="modal-body">
+                        <p class="modal-text">It's great to hear from you! I truly appreciate your continued interest and the time you've taken to reach out.</p>
+                        <p class="modal-text">Your message has been received, and I will get back to you as soon as possible. If there's anything specific you'd like to discuss, feel free to let me know!</p>
+                        <p class="modal-text">In the meantime, feel free to explore my latest projects and updates. Looking forward to our conversation!</p>
+                    </slot>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand" onclick={handleModalClose}>Close</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

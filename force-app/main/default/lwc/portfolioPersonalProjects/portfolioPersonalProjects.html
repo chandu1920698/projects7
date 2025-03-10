@@ -4,9 +4,9 @@
     </template>
 
     <div class="project-container slds-m-around_medium">
-        <lightning-layout multiple-rows class="slds-m-around_medium">
+        <!-- <lightning-layout multiple-rows horizontal-align="space"> -->
             <template for:each={projectDetails} for:item="project">
-                <lightning-layout-item key={project.projectName}>
+                <lightning-layout-item key={project.projectName} padding="around-small">
                     <div class="card">
                         <lightning-carousel class="custom-carousel">
                             <template for:each={project.imageUrls} for:item="imageUrl">
@@ -18,7 +18,6 @@
                                 >
                                 </lightning-carousel-image>
                             </template>
-                            
                         </lightning-carousel>
                         <div class="slds-button bottom slds-align_absolute-center">{project.projectName}
                             <span>
@@ -30,6 +29,6 @@
                     </div>
                 </lightning-layout-item>
             </template>
-        </lightning-layout>
+        <!-- </lightning-layout> -->
     </div>
 </template>

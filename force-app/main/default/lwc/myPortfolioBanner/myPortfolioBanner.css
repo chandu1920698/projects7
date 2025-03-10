@@ -78,9 +78,3 @@
     opacity: 0; /* Hide icon initially */
     animation-fill-mode: forwards; /* Ensures animation sticks at final position */
 }
-
-/* .icon:nth-child(1) { animation-delay: 0s; }
-.icon:nth-child(2) { animation-delay: 0.5s; }
-.icon:nth-child(3) { animation-delay: 1s; }
-.icon:nth-child(4) { animation-delay: 1.5s; }
-.icon:nth-child(5) { animation-delay: 2s; } */

@@ -122,7 +122,7 @@ export default class MyPortfolioBanner extends LightningElement {
         // console.log("totalViewsValue -> " + totalViewsValue);
 
         let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
-        console.log("tempFullName -> " + JSON.stringify(tempFullName));
+        // console.log("tempFullName -> " + JSON.stringify(tempFullName));
 
         if(totalViewsValue != undefined && tempFullName != undefined && !this.renderedCallbackCheck) {
             // Scroll to the top
