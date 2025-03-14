@@ -11,6 +11,7 @@
                     <div class="card">
                         <a href={certificate.certUrl} target="_blank" class="image-wrapper">
                             <img src={certificate.imageUrl} alt={certificate.certName} style="width:100%" class="hover-image">
+                            <lightning-icon icon-name='utility:new_window' alternative-text='View in LinkedIn' size='x-small' title='View in LinkedIn'></lightning-icon>
                         </a>
                         <!-- <p>{certificate.certName}</p>
                         <p><button>{certificate.certName}</button></p> -->
@@ -29,8 +30,7 @@
                         <a href={certificate.certUrl} target="_blank">
                             <img src={certificate.imageUrl} alt={certificate.certName} style="width:100%">
                         </a>
-                        <!-- <p>{certificate.certName}</p>
-                        <p><button>{certificate.certName}</button></p> -->
+                        <lightning-icon icon-name='utility:new_window' alternative-text='View Certificate' size='x-small' title='View Certificate'></lightning-icon>
                     </div>
                 </lightning-layout-item>
             </template>

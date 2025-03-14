@@ -8,7 +8,7 @@
             <template for:each={projectDetails} for:item="project">
                 <lightning-layout-item key={project.projectName} padding="around-small">
                     <div class="card">
-                        <lightning-carousel class="custom-carousel">
+                        <lightning-carousel class="custom-carousel" disable-auto-scroll={project.isDisableAutoScroll}>
                             <template for:each={project.imageUrls} for:item="imageUrl">
                                 <lightning-carousel-image key={imageUrl}
                                     src = {imageUrl}

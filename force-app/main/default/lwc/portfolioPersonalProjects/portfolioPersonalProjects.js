@@ -47,7 +47,8 @@ export default class PortfolioPersonalProjects extends LightningElement {
                 if(projectImage5 != null) {
                     imageUrls.push(projectImage5);
                 }
-                this.projectDetails.push({projectId, projectName, projectDescription, projectWebsite, imageUrls});
+                let isDisableAutoScroll = imageUrls.length > 1 ? false : true; 
+                this.projectDetails.push({projectId, projectName, projectDescription, projectWebsite, imageUrls, isDisableAutoScroll});
             });
 
             console.log("this.projectDetails -> " + JSON.stringify(this.projectDetails));

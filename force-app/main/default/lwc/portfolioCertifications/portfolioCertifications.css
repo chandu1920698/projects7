@@ -39,3 +39,10 @@
 .spinner-center {
   top: 50%;
 }
+
+.card lightning-icon {
+  float: right;
+  position: absolute;
+  margin-left: -1.5rem;
+  margin-top: 0.5rem;
+}

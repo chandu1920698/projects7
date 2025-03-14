@@ -7,7 +7,9 @@ import DESIGNATION from '@salesforce/schema/Portfolio__c.Designation__c';
 import TOTAL_VIEWS from '@salesforce/schema/Portfolio__c.Total_Views__c';
 import COMPANY_LOCATION from '@salesforce/schema/Portfolio__c.CompanyLocation__c';
 import PROFILE_PIC from '@salesforce/schema/Portfolio__c.Profile_Pic__c';
+import ABOUT_ME from '@salesforce/schema/Portfolio__c.About_Me__c';
 import updatePortfolioTotalViews from '@salesforce/apex/PortfolioController.updatePortfolioTotalViews';
+import FORM_FACTOR from "@salesforce/client/formFactor";
 
 export default class MyPortfolioBanner extends LightningElement {
 
@@ -40,56 +42,33 @@ export default class MyPortfolioBanner extends LightningElement {
     applyAnimationDelayToIcons() {
         try {
             const iconsList = this.template.querySelectorAll('.icon');
-            let randomNumbers = new Set();
-            iconsList.forEach((icon, index) => {
-                console.log("icon -> " + JSON.stringify(icon));
-                let randomNumber = Math.floor(Math.random() * iconsList.length);
-                while(randomNumbers.has(randomNumber)) {
-                    randomNumber = Math.floor(Math.random() * iconsList.length);
-                }
-                randomNumbers.add(randomNumber);
-                icon.style = `animation-delay: ${randomNumber/2}s;`;
-            });
+            if(FORM_FACTOR == 'Small' || FORM_FACTOR == 'Medium'|| FORM_FACTOR == 'Large Tablet') {
+                let randomNumbers = new Set();
+                iconsList.forEach((icon, index) => {
+                    console.log("icon -> " + JSON.stringify(icon));
+                    let randomNumber = Math.floor(Math.random() * iconsList.length);
+                    while(randomNumbers.has(randomNumber)) {
+                        randomNumber = Math.floor(Math.random() * iconsList.length);
+                    }
+                    randomNumbers.add(randomNumber);
+                    icon.style = `animation-delay: ${randomNumber/2}s;`;
+                });
+            } else if (FORM_FACTOR == 'Large') { 
+                iconsList.forEach((icon, index) => {
+                    console.log("icon -> " + JSON.stringify(icon));
+                    icon.style = `animation-delay: ${(iconsList.length - index)}s;`;
+                });
+            }
+            
         } catch (error) {
             console.log("Error icon.style.animationDelay -> " + error);
         }
     }
 
 
-    @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION, PROFILE_PIC, TOTAL_VIEWS]})
+    @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION, PROFILE_PIC, TOTAL_VIEWS, ABOUT_ME]})
     portfolioData;
 
-    // @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION]})
-    // portfolioHandler({data, error}) {
-    //     if(data) {
-    //         console.log("Data -> " + JSON.stringify(data));
-    //     } else if(error) {
-    //         console.log("error -> " + JSON.stringify(error));
-    //     }
-    // }
-
-    // get fullName() {
-    //     // console.log("this.portfolioData -> " + JSON.stringify(this.portfolioData));
-    //     let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
-
-    //     console.log("tempFullName -> " + JSON.stringify(tempFullName));
-
-    //     if(tempFullName != undefined) {
-    //         try {
-    //             let subStringLength = 1;
-    //             const intervalId = setInterval(() => {
-    //                 // console.log(`Interval running... Count: ${count + 1}`);
-    //                 if (subStringLength == tempFullName.length) {
-    //                     clearInterval(intervalId); // Stops the interval
-    //                     console.log("Interval stopped.");
-    //                     return tempFullName.substring(0, subStringLength++);
-    //                 }
-    //             }, 10); 
-    //         } catch(error) {
-    //             console.log('Error in fullName -> ' + error);
-    //         }
-    //     }
-    // }
     get companyName() {
         return getFieldValue(this.portfolioData?.data, COMPANY_NAME);
     }
@@ -98,6 +77,15 @@ export default class MyPortfolioBanner extends LightningElement {
     }
     get companyLocation() {
         return getFieldValue(this.portfolioData?.data, COMPANY_LOCATION);
+    }
+
+    get aboutMe() {
+        let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
+        let aboutMeHtml = this.template.querySelector('.about-me-mobile');
+        if(aboutMeHtml) {
+            aboutMeHtml.innerHTML = aboutMeFieldValue;
+        }
+        return '';
     }
 
     get profilePicUrl() {
@@ -124,9 +112,19 @@ export default class MyPortfolioBanner extends LightningElement {
         let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
         // console.log("tempFullName -> " + JSON.stringify(tempFullName));
 
-        if(totalViewsValue != undefined && tempFullName != undefined && !this.renderedCallbackCheck) {
+        let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
+        console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
+
+        if(totalViewsValue != undefined && tempFullName != undefined && aboutMeFieldValue != undefined && !this.renderedCallbackCheck) {
+
+            const aboutMeHtml = this.template.querySelector('.about-me');
+            console.log("aboutMeHtml -> " + JSON.stringify(aboutMeHtml));
+            console.log(aboutMeHtml);
+            aboutMeHtml.innerHTML = aboutMeFieldValue;
+
             // Scroll to the top
-            const portfolioBanner = this.template.querySelector('.banner');
+            // const portfolioBanner = this.template.querySelector('.banner');
+            const portfolioBanner = this.template.querySelector('.banner-two-column');
             console.log('portfolioBanner-> ' + JSON.stringify(portfolioBanner));
             portfolioBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
 

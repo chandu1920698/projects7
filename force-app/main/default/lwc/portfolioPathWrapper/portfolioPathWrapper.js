@@ -170,7 +170,7 @@ export default class PortfolioPathWrapper extends LightningElement {
                     const scrollToElement = this.template.querySelector(`.${className}`);
                     console.log("scrollToElement -> " + JSON.stringify(scrollToElement));
                     scrollToElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 500);
+                }, 1000);
             }
 
             this.sldsPathValues.forEach(path => {
