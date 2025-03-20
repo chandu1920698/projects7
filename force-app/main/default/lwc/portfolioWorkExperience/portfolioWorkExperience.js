@@ -1,16 +1,21 @@
 import { LightningElement, wire, api, track } from 'lwc';
 import { getRelatedListRecords } from 'lightning/uiRelatedListApi';
+import FORM_FACTOR from "@salesforce/client/formFactor";
 
 export default class PortfolioWorkExperience extends LightningElement {
 
     @api recordId;
     @api isEducation;
 
-    @track showSpinner = true;
+    // @track showSpinner = true;
     @track workExperienceList = [];
+    @track isDesktop = true;
 
     connectedCallback() {
-        console.log("PortfolioWorkExperience - recordId => " +  this.recordId);
+        //console.log("PortfolioWorkExperience - recordId => " +  this.recordId);
+        if(FORM_FACTOR == 'Small' || FORM_FACTOR == 'Medium') {
+            this.isDesktop = false;
+        }
     }
     @wire(getRelatedListRecords, {
         parentRecordId : '$recordId',
@@ -25,12 +30,18 @@ export default class PortfolioWorkExperience extends LightningElement {
         'Work_Experience__c.Is_Education__c'],
         // WHERE : "Work_Experience__c.Is_Education__c : $isEducation",
     })workExperienceHandler({data, error}) {
-        this.showSpinner = true;
+        // this.showSpinner = true;
+        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+            message: 'Event Received',  
+            showSpinner : true, 
+        } });
+        this.dispatchEvent(loadDataEvent);
+        
         if(data) {
-            console.log("data -> " + JSON.stringify(data));
+            //console.log("data -> " + JSON.stringify(data));
             this.formatWorkExperience(data);
         } else {
-            console.log("error -> " + JSON.stringify(error));
+            //console.log("error -> " + JSON.stringify(error));
         }
     };
 
@@ -50,7 +61,7 @@ export default class PortfolioWorkExperience extends LightningElement {
             let isShowExperience = true;
             let dropdownClass = 'slds-timeline__item_expandable slds-timeline__item_task slds-is-open';
 
-            // console.log(jobIsEducation + " -> " + this.isEducation);
+            // //console.log(jobIsEducation + " -> " + this.isEducation);
 
             if(jobIsEducation.toString() == this.isEducation.toString()) {
                 return {id, jobCompnayName, jobDescription, jobStartDate, jobRole, jobEndDate, jobWorkLocation, jobIsCurrent, isShowExperience, dropdownClass};
@@ -58,15 +69,20 @@ export default class PortfolioWorkExperience extends LightningElement {
         });
         
         this.workExperienceList = this.workExperienceList.filter(item => item != null);
-        console.log("this.workExperienceList -> " + JSON.stringify(this.workExperienceList));
+        //console.log("this.workExperienceList -> " + JSON.stringify(this.workExperienceList));
         if(this.workExperienceList.length > 0) {
-            this.showSpinner = false;
+            // this.showSpinner = false;
+            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                message: 'Event Received',  
+                showSpinner : false,
+            } });
+            this.dispatchEvent(loadDataEvent);
         }
     }
 
     handleShowExperienceClick(event) {
         let experienceId = event.currentTarget.dataset.id;
-        console.log("experienceId => " + event.currentTarget.dataset.id);
+        //console.log("experienceId => " + event.currentTarget.dataset.id);
         
         this.workExperienceList.forEach(experience => {
             if(experience.id == experienceId) {

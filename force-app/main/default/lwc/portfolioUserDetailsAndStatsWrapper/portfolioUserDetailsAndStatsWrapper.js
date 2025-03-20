@@ -18,9 +18,9 @@ export default class PortfolioUserDetailsAndStatsWrapper extends LightningElemen
     
     // ({data, error}) {
     //     if(data) {
-    //         console.log("Data -> " + JSON.stringify(data));
+    //         //console.log("Data -> " + JSON.stringify(data));
     //     } else if(error) {
-    //         console.log("error -> " + JSON.stringify(error));
+    //         //console.log("error -> " + JSON.stringify(error));
     //     }
     // };
 

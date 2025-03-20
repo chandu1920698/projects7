@@ -5,12 +5,18 @@ export default class PortfolioPersonalProjects extends LightningElement {
 
     @api recordId;
 
-    @track showSpinner = true;
+    // @track showSpinner = true;
     @track projectDetails;
 
     connectedCallback() {
-        this.showSpinner = true;
-        console.log('connectedCallback PortfolioPersonalProjects this.recordId => ' + JSON.stringify(this.recordId));
+        // this.showSpinner = true;
+        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+            message: 'Event Received',  
+            showSpinner : true, 
+        } });
+        this.dispatchEvent(loadDataEvent);
+        
+        //console.log('connectedCallback PortfolioPersonalProjects this.recordId => ' + JSON.stringify(this.recordId));
         this.getProjectDetails();
         
     }
@@ -18,7 +24,7 @@ export default class PortfolioPersonalProjects extends LightningElement {
     getProjectDetails() {
         getProjects({portfolioRecordId : this.recordId})
         .then(data => {
-            // console.log('ppp projectDetails => ' + JSON.stringify(data));
+            // //console.log('ppp projectDetails => ' + JSON.stringify(data));
 
             this.projectDetails = [];
             data.forEach(project => {
@@ -51,13 +57,18 @@ export default class PortfolioPersonalProjects extends LightningElement {
                 this.projectDetails.push({projectId, projectName, projectDescription, projectWebsite, imageUrls, isDisableAutoScroll});
             });
 
-            console.log("this.projectDetails -> " + JSON.stringify(this.projectDetails));
+            //console.log("this.projectDetails -> " + JSON.stringify(this.projectDetails));
 
             if(this.projectDetails.length != 0) {
-                this.showSpinner = false;
+                // this.showSpinner = false;
+                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                    message: 'Event Received',  
+                    showSpinner : false,
+                } });
+                this.dispatchEvent(loadDataEvent);
             }
         }).catch(error => {
-            console.log("connectedCallback PortfolioPersonalProjects this.recordId => " + JSON(error));
+            //console.log("connectedCallback PortfolioPersonalProjects this.recordId => " + JSON(error));
         });
     }
 
@@ -73,7 +84,7 @@ export default class PortfolioPersonalProjects extends LightningElement {
         // Get the src attribute value
         let imageUrl = imgElement ? imgElement.getAttribute('src') : null;
 
-        console.log('Image src:', imageUrl);
+        //console.log('Image src:', imageUrl);
 
         return imageUrl;
 

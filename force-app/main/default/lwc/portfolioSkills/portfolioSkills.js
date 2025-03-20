@@ -20,15 +20,21 @@ export default class PortfolioSkills extends LightningElement {
     operatingSystems = [];
     programmingLanguages = [];
 
-    @track showSpinner = true;
+    // @track showSpinner = true;
 
     @wire(getRecord, {
         recordId:'$recordId',
         fields:[TECH_SKILLS, SOFT_SKILLS, SOFTWARE, METHODOLOGIES, DATABASE, OPERATING_SYSTEMS, PROGRAMMING_LANGUAGES]
     })skillHandler({data, error}){
-        this.showSpinner = true;
+        // this.showSpinner = true;
+        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+            message: 'Event Received',  
+            showSpinner : true, 
+        } });
+        this.dispatchEvent(loadDataEvent);
+
         if(data){
-            console.log("Skills Data", JSON.stringify(data));
+            //console.log("Skills Data", JSON.stringify(data));
             this.formatSkills(data);
         }
         if(error){
@@ -46,16 +52,23 @@ export default class PortfolioSkills extends LightningElement {
         this.operatingSystems = Operating_Systems__c?.value ? Operating_Systems__c.value.split(','):null;
         this.programmingLanguages = Programming_Languages__c?.value ? Programming_Languages__c.value.split(','):null;
 
-        console.log("this.techSkills -> ", JSON.stringify(this.techSkills));
-        console.log("this.softSkills -> ", JSON.stringify(this.softSkills));
-        console.log("this.methodologies -> ", JSON.stringify(this.methodologies));
-        console.log("this.toolsSkills -> ", JSON.stringify(this.toolsSkills));
-        console.log("this.databases -> ", JSON.stringify(this.databases));
-        console.log("this.operatingSystems -> ", JSON.stringify(this.operatingSystems));
-        console.log("this.programmingLanguages -> ", JSON.stringify(this.programmingLanguages));
+        //console.log("this.techSkills -> ", JSON.stringify(this.techSkills));
+        //console.log("this.softSkills -> ", JSON.stringify(this.softSkills));
+        //console.log("this.methodologies -> ", JSON.stringify(this.methodologies));
+        //console.log("this.toolsSkills -> ", JSON.stringify(this.toolsSkills));
+        //console.log("this.databases -> ", JSON.stringify(this.databases));
+        //console.log("this.operatingSystems -> ", JSON.stringify(this.operatingSystems));
+        //console.log("this.programmingLanguages -> ", JSON.stringify(this.programmingLanguages));
 
         if(this.techSkills || this.softSkills || this.methodologies || this.toolsSkills || this.databases || this.operatingSystems || this.programmingLanguages) {
-            this.showSpinner = false;
+            // this.showSpinner = false;
+
+            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                message: 'Event Received',  
+                showSpinner : false, 
+            } });
+            this.dispatchEvent(loadDataEvent);
+
         }
         
     }

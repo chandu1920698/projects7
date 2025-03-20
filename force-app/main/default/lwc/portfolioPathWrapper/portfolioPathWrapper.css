@@ -28,6 +28,10 @@
     }
 }
 
+.loading-spinner {
+    position: relative;
+}
+
 /* .transition-time {
     transition: 1s;
 } */

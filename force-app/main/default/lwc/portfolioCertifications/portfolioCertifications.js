@@ -8,7 +8,6 @@ export default class PortfolioCertifications extends LightningElement {
     @track certificationList = [];
     @track salesforceCertifications = [];
     @track otherCertifications = [];
-    @track showSpinner = true;
 
     @wire(getRelatedListRecords, {
         parentRecordId : '$recordId',
@@ -18,9 +17,15 @@ export default class PortfolioCertifications extends LightningElement {
         'Certification__c.Is_Salesforce_Certification__c',
         'Certification__c.Certification_Url__c']
     })wireGetCertifications({data, error}) {
-        this.showSpinner = true;
+
+        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+            message: 'Event Received',  
+            showSpinner : true, 
+        } });
+        this.dispatchEvent(loadDataEvent);
+
         if(data) {
-            console.log("data -> " + JSON.stringify(data));
+            //console.log("data -> " + JSON.stringify(data));
 
             this.certificationList = data.records.map(item => {
                 const {Certificate_Image__c, Name, Is_Salesforce_Certification__c, Certification_Url__c} = item.fields;
@@ -42,23 +47,28 @@ export default class PortfolioCertifications extends LightningElement {
                 // Get the src attribute value
                 let imageUrl = imgElement ? imgElement.getAttribute('src') : null;
 
-                console.log('Image src:', imageUrl);
+                // //console.log('Image src:', imageUrl);
 
                 return {certId, imageUrl, certIsSalesforceCert, certName, certUrl};
             });
 
-            // console.log("this.certificationList -> " + JSON.stringify(this.certificationList));
+            // //console.log("this.certificationList -> " + JSON.stringify(this.certificationList));
 
             this.salesforceCertifications = this.certificationList.filter(certificate => certificate.certIsSalesforceCert == true);
             this.otherCertifications = this.certificationList.filter(certificate => certificate.certIsSalesforceCert == false);
 
-            console.log("this.salesforceCertifications -> " + JSON.stringify(this.salesforceCertifications));
-            console.log("this.otherCertifications -> " + JSON.stringify(this.otherCertifications));
+            // //console.log("this.salesforceCertifications -> " + JSON.stringify(this.salesforceCertifications));
+            // //console.log("this.otherCertifications -> " + JSON.stringify(this.otherCertifications));
             if(this.salesforceCertifications.length != 0 || this.salesforceCertifications != 0) {
-                this.showSpinner = false;
+
+                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                    message: 'Event Received',  
+                    showSpinner : false, 
+                } });
+                this.dispatchEvent(loadDataEvent);
             }
         } else {
-            console.log("error -> " + JSON.stringify(error));
+            //console.log("error -> " + JSON.stringify(error));
         }
     };
 

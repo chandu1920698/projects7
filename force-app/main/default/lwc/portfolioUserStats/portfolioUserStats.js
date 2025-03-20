@@ -14,12 +14,12 @@ export default class PortfolioUserStats extends LightningElement {
     //         let url = PORTFOLIO_ASSETS + "/PortfolioAssets/Ranks/" + this.rank + ".png";
     //         this.trailheadRankImg = url;
 
-    //         console.log("this.trailheadRankImg -> "+ this.trailheadRankImg)
+    //         //console.log("this.trailheadRankImg -> "+ this.trailheadRankImg)
     //     }
     // }
 
     get trailheadRankImg() {
-        console.log(" this.rank -> "+  this.rank);
+        //console.log(" this.rank -> "+  this.rank);
         return PORTFOLIO_ASSETS + "/PortfolioAssets/Ranks/" + this.rank + ".png";
     }
 }

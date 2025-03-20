@@ -36,7 +36,7 @@ export default class MyPortfolioBanner extends LightningElement {
 
     
     connectedCallback() {
-        console.log("this.recordId -> " + JSON.stringify(this.recordId));
+        //console.log("this.recordId -> " + JSON.stringify(this.recordId));
     }
 
     applyAnimationDelayToIcons() {
@@ -45,7 +45,7 @@ export default class MyPortfolioBanner extends LightningElement {
             if(FORM_FACTOR == 'Small' || FORM_FACTOR == 'Medium'|| FORM_FACTOR == 'Large Tablet') {
                 let randomNumbers = new Set();
                 iconsList.forEach((icon, index) => {
-                    console.log("icon -> " + JSON.stringify(icon));
+                    //console.log("icon -> " + JSON.stringify(icon));
                     let randomNumber = Math.floor(Math.random() * iconsList.length);
                     while(randomNumbers.has(randomNumber)) {
                         randomNumber = Math.floor(Math.random() * iconsList.length);
@@ -55,13 +55,13 @@ export default class MyPortfolioBanner extends LightningElement {
                 });
             } else if (FORM_FACTOR == 'Large') { 
                 iconsList.forEach((icon, index) => {
-                    console.log("icon -> " + JSON.stringify(icon));
+                    //console.log("icon -> " + JSON.stringify(icon));
                     icon.style = `animation-delay: ${(iconsList.length - index)}s;`;
                 });
             }
             
         } catch (error) {
-            console.log("Error icon.style.animationDelay -> " + error);
+            //console.log("Error icon.style.animationDelay -> " + error);
         }
     }
 
@@ -107,43 +107,43 @@ export default class MyPortfolioBanner extends LightningElement {
 
     renderedCallback() {
         let totalViewsValue = getFieldValue(this.portfolioData?.data, TOTAL_VIEWS);
-        // console.log("totalViewsValue -> " + totalViewsValue);
+        // //console.log("totalViewsValue -> " + totalViewsValue);
 
         let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
-        // console.log("tempFullName -> " + JSON.stringify(tempFullName));
+        // //console.log("tempFullName -> " + JSON.stringify(tempFullName));
 
         let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
-        console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
+        // //console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
 
         if(totalViewsValue != undefined && tempFullName != undefined && aboutMeFieldValue != undefined && !this.renderedCallbackCheck) {
 
             const aboutMeHtml = this.template.querySelector('.about-me');
-            console.log("aboutMeHtml -> " + JSON.stringify(aboutMeHtml));
-            console.log(aboutMeHtml);
+            // //console.log("aboutMeHtml -> " + JSON.stringify(aboutMeHtml));
+            // //console.log(aboutMeHtml);
             aboutMeHtml.innerHTML = aboutMeFieldValue;
 
             // Scroll to the top
             // const portfolioBanner = this.template.querySelector('.banner');
             const portfolioBanner = this.template.querySelector('.banner-two-column');
-            console.log('portfolioBanner-> ' + JSON.stringify(portfolioBanner));
+            // //console.log('portfolioBanner-> ' + JSON.stringify(portfolioBanner));
             portfolioBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             totalViewsValue++;
             this.renderedCallbackCheck = true;
             updatePortfolioTotalViews({recordId : this.recordId})
             .then(response => {
-                console.log("updatePortfolioTotalViews -> " + JSON.stringify(response));
+                //console.log("updatePortfolioTotalViews -> " + JSON.stringify(response));
             }).catch(error => {
-                console.log("Error updatePortfolioTotalViews -> " + error);
+                //console.log("Error updatePortfolioTotalViews -> " + error);
             });
 
             let count = 1;
             const pageImpressionIntervalId = setInterval(() => {
-                // console.log(`Interval running... Count: ${count + 1}`);
+                // //console.log(`Interval running... Count: ${count + 1}`);
                 this.totalViewsCounter = count++;
                 if (this.totalViewsCounter >= totalViewsValue) {
                     clearInterval(pageImpressionIntervalId); // Stops the interval
-                    console.log("Interval stopped.");
+                    //console.log("Interval stopped.");
                     return;
                 }
             }, 10); 
@@ -153,7 +153,7 @@ export default class MyPortfolioBanner extends LightningElement {
                 this.fullName = tempFullName.substring(0, subStringLength++);
                 if (subStringLength > tempFullName.length) {
                     clearInterval(fullNameIntervalId); // Stops the interval
-                    console.log("Interval stopped.");
+                    //console.log("Interval stopped.");
                     return;
                 }
             }, 50); 

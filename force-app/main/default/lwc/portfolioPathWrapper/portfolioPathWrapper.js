@@ -71,9 +71,9 @@ export default class PortfolioPathWrapper extends LightningElement {
     showContactMe = false;
 
     handleSelectPath(event) {
-        console.log("event -> "+ JSON.stringify(event));
-        console.log(JSON.stringify(event.currentTarget));
-        console.log(JSON.stringify(event.currentTarget?.dataset.value));
+        //console.log("event -> "+ JSON.stringify(event));
+        //console.log(JSON.stringify(event.currentTarget));
+        //console.log(JSON.stringify(event.currentTarget?.dataset.value));
 
         const scrollToElement = this.template.querySelector('.portfolioWrapperClass');
         scrollToElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -91,9 +91,9 @@ export default class PortfolioPathWrapper extends LightningElement {
     }
 
     handleNextPrevClick(event) {
-        console.log("event -> "+ JSON.stringify(event));
-        console.log(JSON.stringify(event.target));
-        console.log(JSON.stringify(event.target?.dataset.buttonType));
+        //console.log("event -> "+ JSON.stringify(event));
+        //console.log(JSON.stringify(event.target));
+        //console.log(JSON.stringify(event.target?.dataset.buttonType));
 
         if(event.target?.dataset.buttonType == 'next') {
             this.currentPathIndex = (this.currentPathIndex + 1) % (this.sldsPathValues.length);
@@ -168,7 +168,7 @@ export default class PortfolioPathWrapper extends LightningElement {
             if(Number(selectedPathIndex) != this.currentPathIndex) {
                 setTimeout(() => { 
                     const scrollToElement = this.template.querySelector(`.${className}`);
-                    console.log("scrollToElement -> " + JSON.stringify(scrollToElement));
+                    //console.log("scrollToElement -> " + JSON.stringify(scrollToElement));
                     scrollToElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 1000);
             }
@@ -178,6 +178,29 @@ export default class PortfolioPathWrapper extends LightningElement {
                     this.currentPathIndex = path.pathIndex;
                 }
             });
+        }
+    }
+
+    handleOnLoadData(event) {
+        //console.log("handleOnLoadData");
+        //console.log("Event -> " + JSON.stringify(event));
+        //console.log("event.detail.showSpinner -> " + event.detail.showSpinner);
+        //console.log("this.showSpinner -> " + this.showSpinner);
+        // let timeoutValue = 3000;
+        // setTimeout(() => {
+        //     if(event.detail.showSpinner == true) {
+        //         timeoutValue = 0;
+        //     }
+        //     this.showSpinner = event.detail.showSpinner;
+        // }, timeoutValue);
+
+        if(event.detail.showSpinner == true) {
+            this.showSpinner = event.detail.showSpinner;
+        } else {
+            setTimeout(() => {
+                this.showSpinner = event.detail.showSpinner;
+            }, 3000);
+
         }
     }
 }

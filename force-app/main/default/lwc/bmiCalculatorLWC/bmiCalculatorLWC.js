@@ -8,7 +8,7 @@ export default class BmiCalculatorLWC extends LightningElement {
     result = '';
 
     handleInputChange(event) {
-        //console.log("event.target -> " + event.target);
+        ////console.log("event.target -> " + event.target);
         if(event.target) {
             if(event.target.name === "height") {
                 this.height = Number(event.target.value);
@@ -20,8 +20,8 @@ export default class BmiCalculatorLWC extends LightningElement {
 
     handleCalculate(event) {
         event.preventDefault();
-        //console.log("this.weight -> " + this.weight);
-        //console.log("this.height -> " + this.height);
+        ////console.log("this.weight -> " + this.weight);
+        ////console.log("this.height -> " + this.height);
         this.bmiValue = (this.weight/((this.height * this.height)/10000)).toFixed(2);
 
         if(this.bmiValue < 18.5) {
@@ -34,8 +34,8 @@ export default class BmiCalculatorLWC extends LightningElement {
             this.result = "Obese";
         }
 
-        //console.log("this.bmiValue -> " + this.bmiValue);
-        //console.log("this.result -> " + this.result);
+        ////console.log("this.bmiValue -> " + this.bmiValue);
+        ////console.log("this.result -> " + this.result);
     }
 
     handleRecalculate(){

@@ -5,7 +5,15 @@ export default class PortfolioSummary extends LightningElement {
     @api recordId;
     @api objectApiName;
 
-    @track showSpinner = true;
+    // @track showSpinner = true;
+
+    connectedCallback() {
+        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+            message: 'Event Received',  
+            showSpinner : true,
+        } });
+        this.dispatchEvent(loadDataEvent);
+    }
 
     renderedCallback() {
         // if(this.isLoading == true) {
@@ -19,7 +27,12 @@ export default class PortfolioSummary extends LightningElement {
         const checkDataLoad = () => {
             const outputField = this.template.querySelector('lightning-output-field');
             if (outputField && outputField.innerText.trim() !== '') {
-                this.showSpinner = false;
+                // this.showSpinner = false;
+                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                    message: 'Event Received',  
+                    showSpinner : false, 
+                } });
+                this.dispatchEvent(loadDataEvent);
                 return true; // Data loaded
             }
             return false; // Data not yet loaded

@@ -85,82 +85,116 @@
 	
     <div class="accordion-wrapper show-accordion-on-mobile-view">
         <lightning-accordion>
-            <lightning-accordion-section name="About Me" label="About Me" onclick={handleMobileAccordiantabClick} class="About Me" index="0">
+            <lightning-accordion-section name="About Me" label="About Me" onclick={handleMobileAccordiantabClick} class="About Me loading-spinner" index="0">
                 <template lwc:if={showSummary}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
                             <c-portfolio-summary
                                 record-id={recordId}
                                 object-api-name={objectApiName}
+                                onloaddata={handleOnLoadData}
                             ></c-portfolio-summary>
+                            <template if:true={showSpinner}>
+                                <c-portfolio-spinner></c-portfolio-spinner>
+                            </template>
                         </div>
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Personal Projects" label="Personal Projects" onclick={handleMobileAccordiantabClick} class="Personal-Projects" index="1">
+
+            <lightning-accordion-section name="Personal Projects" label="Personal Projects" onclick={handleMobileAccordiantabClick} class="Personal-Projects loading-spinner" index="1">
                 <template lwc:if={showPersonalProjects}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
                             <c-portfolio-personal-projects
                                 record-id={recordId}
+                                onloaddata={handleOnLoadData}
                             ></c-portfolio-personal-projects>
+                            <template if:true={showSpinner}>
+                                <c-portfolio-spinner></c-portfolio-spinner>
+                            </template>
                         </div>
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Work Experience" label="Work Experience" onclick={handleMobileAccordiantabClick} class="Work-Experience" index="2">
+
+            <lightning-accordion-section name="Work Experience" label="Work Experience" onclick={handleMobileAccordiantabClick} class="Work-Experience loading-spinner" index="2">
                 <template lwc:if={showWorkExperience}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
                             <c-portfolio-work-experience
                                 record-id={recordId}
                                 is-education=false
+                                onloaddata={handleOnLoadData}
                             ></c-portfolio-work-experience>
+                            <template if:true={showSpinner}>
+                                <c-portfolio-spinner></c-portfolio-spinner>
+                            </template>
                         </div>
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Skills" label="Skills" onclick={handleMobileAccordiantabClick} class="Skills" index="3">
+
+            <lightning-accordion-section name="Skills" label="Skills" onclick={handleMobileAccordiantabClick} class="Skills loading-spinner" index="3">
                 <template lwc:if={showSkills}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
                             <c-portfolio-skills
                                 record-id={recordId}
+                                onloaddata={handleOnLoadData}
                             ></c-portfolio-skills>
+                            <template if:true={showSpinner}>
+                                <c-portfolio-spinner></c-portfolio-spinner>
+                            </template>
                         </div>
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Education" label="Education" onclick={handleMobileAccordiantabClick} class="Education" index="4">
+
+            <lightning-accordion-section name="Education" label="Education" onclick={handleMobileAccordiantabClick} class="Education loading-spinner" index="4">
                 <template lwc:if={showEducation}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
                             <c-portfolio-work-experience
                                 record-id={recordId}
                                 is-education=true
+                                onloaddata={handleOnLoadData}
                             ></c-portfolio-work-experience>
+                            <template if:true={showSpinner}>
+                                <c-portfolio-spinner></c-portfolio-spinner>
+                            </template>
                         </div>
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Certifications" label="Certifications" onclick={handleMobileAccordiantabClick} class="Certifications" index="5">
+
+            <lightning-accordion-section name="Certifications" label="Certifications" onclick={handleMobileAccordiantabClick} class="Certifications loading-spinner" index="5">
                 <template lwc:if={showCertifications}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
                             <c-portfolio-certifications 
                                 record-id={recordId}
+                                onloaddata={handleOnLoadData}
                             ></c-portfolio-certifications>
+                            <template if:true={showSpinner}>
+                                <c-portfolio-spinner></c-portfolio-spinner>
+                            </template>
                         </div>
                     </template>
                 </template>
             </lightning-accordion-section>
-            <lightning-accordion-section name="Contact Me" label="Contact Me" onclick={handleMobileAccordiantabClick} class="contact-me" index="6">
+
+            <lightning-accordion-section name="Contact Me" label="Contact Me" onclick={handleMobileAccordiantabClick} class="contact-me loading-spinner" index="6">
                 <template lwc:if={showContactMe}>
                     <template if:true={recordId}>
                         <div class="slds-var-m-left_medium">
                             <c-portfolio-contact-me
                                 record-id={recordId}
+                                onloaddata={handleOnLoadData}
                             ></c-portfolio-contact-me>
+                            <template if:true={showSpinner}>
+                                <c-portfolio-spinner></c-portfolio-spinner>
+                            </template>
                         </div>
                     </template>
                 </template>
