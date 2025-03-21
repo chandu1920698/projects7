@@ -1,131 +1,134 @@
 <template>
-    <div class="banner">
-        <img src={profilePicUrl} alt="" class="profile-pic">
-        <div class="name">{fullName}</div>
-        <div class="designation">{desigationName} @ {companyName}</div>
-        <div class="location">{companyLocation}</div>
-        <div class="about-me-mobile">{aboutMe}</div>
-        <div class="icon-css">
-            <template if:true={linkedInUrl}>
-                <a href={linkedInUrl} target="_blank">
-                    <img src={linkedInIcon} alt="" class="icon">
-                </a>
-            </template>
-            
-            <template if:true={gitHubUrl}>
-                <a href={gitHubUrl} target="_blank">
-                    <img src={githubIcon} alt="" class="icon">
-                </a>
-            </template>
-            
-            <template if:true={youtubeUrl}>
-                <a href={youtubeUrl} target="_blank">
-                    <img src={youtubeIcon} alt="" class="icon">
-                </a>
-            </template>
-
-            <template if:true={trailHeadUrl}>
-                <a href={trailHeadUrl} target="_blank">
-                    <img src={trailheadIcon} alt="" class="icon">
-                </a>
-            </template>
-
-            <template if:true={leetCodeUrl}>
-                <a href={leetCodeUrl} target="_blank">
-                    <img src={leetCodeIcon} alt="" class="icon">
-                </a> 
-            </template>
-
-            <template if:true={twitterUrl}>
-                <a href={twitterUrl} target="_blank">
-                    <img src={twitterIcon} alt="" class="icon">
-                </a> 
-            </template>
-
-            <template if:true={blogUrl}>
-                <a href={blogUrl} target="_blank">
-                    <img src={blogIcon} alt="" class="icon">
-                </a> 
-            </template>
-        </div>
-        <div class="totalViewsClass">
-            Page Impressions : {totalViewsCounter}
-        </div>
-    </div>
-
-    <div class="banner-two-column">
-        <div class="slds-grid slds-gutters">
-            <div class="slds-col slds-size_2-of-3">
-                <div class="slds-grid slds-grid_vertical-align-center">
-                    <div class="slds-col slds-size_1-of-12">
-                        <div class="icon-css">
-                            <div class="slds-col">
-                                <template if:true={linkedInUrl}>
-                                    <a href={linkedInUrl} target="_blank">
-                                        <img src={linkedInIcon} alt="" class="icon">
-                                    </a>
-                                </template>
-                            </div>
-                            <div class="slds-col">
-                                <template if:true={gitHubUrl}>
-                                    <a href={gitHubUrl} target="_blank">
-                                        <img src={githubIcon} alt="" class="icon">
-                                    </a>
-                                </template>
-                            </div>
-                            <div class="slds-col">
-                                <template if:true={youtubeUrl}>
-                                    <a href={youtubeUrl} target="_blank">
-                                        <img src={youtubeIcon} alt="" class="icon">
-                                    </a>
-                                </template>
-                            </div>
-                            <div class="slds-col">
-                                <template if:true={trailHeadUrl}>
-                                    <a href={trailHeadUrl} target="_blank">
-                                        <img src={trailheadIcon} alt="" class="icon">
-                                    </a>
-                                </template>
-                            </div>
-                            <div class="slds-col">
-                                <template if:true={leetCodeUrl}>
-                                    <a href={leetCodeUrl} target="_blank">
-                                        <img src={leetCodeIcon} alt="" class="icon">
-                                    </a> 
-                                </template>
-                            </div>
-                            <div class="slds-col">
-                                <template if:true={twitterUrl}>
-                                    <a href={twitterUrl} target="_blank">
-                                        <img src={twitterIcon} alt="" class="icon">
-                                    </a> 
-                                </template>
-                            </div>
-                            <div class="slds-col">
-                                <template if:true={blogUrl}>
-                                    <a href={blogUrl} target="_blank">
-                                        <img src={blogIcon} alt="" class="icon">
-                                    </a> 
-                                </template>
+    <template if:true={isDesktop}>
+        <div class={bannerCss}>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-3">
+                    <div class="slds-grid slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_1-of-12">
+                            <div class="icon-css">
+                                <div class="slds-col">
+                                    <template if:true={linkedInUrl}>
+                                        <a href={linkedInUrl} target="_blank" title="Open LinkedIn">
+                                            <img src={linkedInIcon} alt="" class={iconCss}>
+                                        </a>
+                                    </template>
+                                </div>
+                                <div class="slds-col">
+                                    <template if:true={gitHubUrl}>
+                                        <a href={gitHubUrl} target="_blank" title="Open GitHub">
+                                            <img src={githubIcon} alt="" class={iconCss}>
+                                        </a>
+                                    </template>
+                                </div>
+                                <div class="slds-col">
+                                    <template if:true={youtubeUrl}>
+                                        <a href={youtubeUrl} target="_blank" title="Open Youtube">
+                                            <img src={youtubeIcon} alt="" class={iconCss}>
+                                        </a>
+                                    </template>
+                                </div>
+                                <div class="slds-col">
+                                    <template if:true={trailHeadUrl}>
+                                        <a href={trailHeadUrl} target="_blank" title="Open Trailhead">
+                                            <img src={trailheadIcon} alt="" class={iconCss}>
+                                        </a>
+                                    </template>
+                                </div>
+                                <div class="slds-col">
+                                    <template if:true={leetCodeUrl}>
+                                        <a href={leetCodeUrl} target="_blank" title="Open Leetcode">
+                                            <img src={leetCodeIcon} alt="" class={iconCss}>
+                                        </a> 
+                                    </template>
+                                </div>
+                                <div class="slds-col">
+                                    <template if:true={twitterUrl}>
+                                        <a href={twitterUrl} target="_blank" title="Open Twitter">
+                                            <img src={twitterIcon} alt="" class={iconCss}>
+                                        </a> 
+                                    </template>
+                                </div>
+                                <div class="slds-col">
+                                    <template if:true={blogUrl}>
+                                        <a href={blogUrl} target="_blank" title="Open Blogs">
+                                            <img src={blogIcon} alt="" class={iconCss}>
+                                        </a> 
+                                    </template>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="slds-col slds-size_11-of-12">
-                        <div class="slds-col details">
-                            <div class="name">{fullName}</div>
-                            <div class="designation">{desigationName} @ {companyName}</div>
-                            <div class="location">{companyLocation}</div>
-                            <div class="about-me"></div>
-                            <div class="totalViewsClass">
-                                Page Impressions : {totalViewsCounter}
+                        <div class="slds-col slds-size_11-of-12">
+                            <div class={detailsCss}>
+                                <div class={nameCss}>{fullName}</div>
+                                <div class="designation">{desigationName} @ {companyName}</div>
+                                <div class="location">{companyLocation}</div>
+                                <div class="about-me"></div>
+                                <div class={totalViewsClassCss}>
+                                    Page Impressions : {totalViewsCounter}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="slds-col slds-size_1-of-3 slds-m-top_large slds-m-bottom_large">
-                <img src={profilePicUrl} alt="" class="profile-pic-two-column">
+                <div class="slds-col slds-size_1-of-3 slds-m-top_large slds-m-bottom_large">
+                    <img src={profilePicUrl} alt="" class={profilePicCss}>
+                </div>
             </div>
         </div>
-    </div>
+    </template>
+    <template if:false={isDesktop}>
+        <div class={bannerCss}>
+            <img src={profilePicUrl} alt="" class={profilePicCss}>
+            <div class={nameCss}>{fullName}</div>
+            <div class="designation">{desigationName} @ {companyName}</div>
+            <div class="location">{companyLocation}</div>
+            <div class="about-me-mobile">{aboutMe}</div>
+            <div class="icon-css">
+                <template if:true={linkedInUrl}>
+                    <a href={linkedInUrl} target="_blank" title="Open LinkedIn">
+                        <img src={linkedInIcon} alt="" class={iconCss}>
+                    </a>
+                </template>
+                
+                <template if:true={gitHubUrl}>
+                    <a href={gitHubUrl} target="_blank" title="Open GitHub">
+                        <img src={githubIcon} alt="" class={iconCss}>
+                    </a>
+                </template>
+                
+                <template if:true={youtubeUrl}>
+                    <a href={youtubeUrl} target="_blank" title="Open Youtube">
+                        <img src={youtubeIcon} alt="" class={iconCss}>
+                    </a>
+                </template>
+    
+                <template if:true={trailHeadUrl}>
+                    <a href={trailHeadUrl} target="_blank" title="Open Trailhead">
+                        <img src={trailheadIcon} alt="" class={iconCss}>
+                    </a>
+                </template>
+    
+                <template if:true={leetCodeUrl}>
+                    <a href={leetCodeUrl} target="_blank" title="Open Leetcode">
+                        <img src={leetCodeIcon} alt="" class={iconCss}>
+                    </a> 
+                </template>
+    
+                <template if:true={twitterUrl}>
+                    <a href={twitterUrl} target="_blank" title="Open Twitter">
+                        <img src={twitterIcon} alt="" class={iconCss}>
+                    </a> 
+                </template>
+    
+                <template if:true={blogUrl}>
+                    <a href={blogUrl} target="_blank" title="Open Blogs">
+                        <img src={blogIcon} alt="" class={iconCss}>
+                    </a> 
+                </template>
+            </div>
+            <div class={totalViewsClassCss}>
+                Page Impressions : {totalViewsCounter}
+            </div>
+        </div>
+    </template>
 </template>

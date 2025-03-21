@@ -8,7 +8,7 @@ export default class PortfolioWorkExperience extends LightningElement {
     @api isEducation;
 
     @track workExperienceList = [];
-    @track isDesktop = true;
+    @track isDesktop = false;
 
     showSpinner;
     deviceFromFactor = FORM_FACTOR;
@@ -18,6 +18,7 @@ export default class PortfolioWorkExperience extends LightningElement {
             this.isDesktop = true;
             this.showSpinner = true;
         } else  {
+            this.isDesktop = false;
             const loadDataEvent = new CustomEvent('loaddata', { detail: { 
                 message: 'Event Received',  
                 showSpinner : true, 

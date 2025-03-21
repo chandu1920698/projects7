@@ -20,6 +20,7 @@ export default class MyPortfolioBanner extends LightningElement {
     trailheadIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/trailhead1.svg";
     twitterIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/twitter.svg";
     blogIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/blog.svg";
+    isDesktop = FORM_FACTOR == 'Large' ? true : false;
 
     renderedCallbackCheck = false;
     @track totalViewsCounter = 0;
@@ -37,29 +38,74 @@ export default class MyPortfolioBanner extends LightningElement {
     
     connectedCallback() {
         //console.log("this.recordId -> " + JSON.stringify(this.recordId));
+        this.applyAnimationDelayToIcons();
+    }
+
+    get bannerCss() {
+        if(this.isDesktop) {
+            return 'banner-desktop';
+        } else {
+            return 'banner-mobile';
+        }
+    }
+
+    get profilePicCss() {
+        if(this.isDesktop) {
+            return 'profile-pic-desktop';
+        } else {
+            return 'profile-pic-mobile';
+        }
+    }
+
+    get iconCss() {
+        if(this.isDesktop) {
+            return 'icon-desktop';
+        } else {
+            return 'icon-mobile';
+        }
+    }
+
+    get totalViewsClassCss() {
+        if(this.isDesktop) {
+            return 'totalViewsClass-desktop';
+        } else {
+            return 'totalViewsClass-mobile';
+        }
+    }
+
+    get nameCss() {
+        if(this.isDesktop) {
+            return 'name-desktop';
+        } else {
+            return 'name-mobile';
+        }
+    }
+
+    get detailsCss() {
+        return 'slds-col details';
     }
 
     applyAnimationDelayToIcons() {
         try {
-            const iconsList = this.template.querySelectorAll('.icon');
-            if(FORM_FACTOR == 'Small' || FORM_FACTOR == 'Medium'|| FORM_FACTOR == 'Large Tablet') {
-                let randomNumbers = new Set();
-                iconsList.forEach((icon, index) => {
-                    //console.log("icon -> " + JSON.stringify(icon));
-                    let randomNumber = Math.floor(Math.random() * iconsList.length);
-                    while(randomNumbers.has(randomNumber)) {
-                        randomNumber = Math.floor(Math.random() * iconsList.length);
-                    }
-                    randomNumbers.add(randomNumber);
-                    icon.style = `animation-delay: ${randomNumber/2}s;`;
-                });
-            } else if (FORM_FACTOR == 'Large') { 
-                iconsList.forEach((icon, index) => {
-                    //console.log("icon -> " + JSON.stringify(icon));
-                    icon.style = `animation-delay: ${(iconsList.length - index)}s;`;
-                });
+            // console.log("this.iconCss -> "+  this.iconCss);
+            const iconsList = this.template.querySelectorAll('.' + this.iconCss);
+            if(iconsList?.length > 0) {
+                if(this.isDesktop) {
+                    iconsList.forEach((icon, index) => {
+                        icon.style = `animation-delay: ${(iconsList.length - index)}s;`;
+                    });
+                } else {
+                    let randomNumbers = new Set();
+                    iconsList.forEach((icon, index) => {
+                        let randomNumber = Math.floor(Math.random() * iconsList.length);
+                        while(randomNumbers.has(randomNumber)) {
+                            randomNumber = Math.floor(Math.random() * iconsList.length);
+                        }
+                        randomNumbers.add(randomNumber);
+                        icon.style = `animation-delay: ${randomNumber/2}s;`;
+                    });
+                }
             }
-            
         } catch (error) {
             //console.log("Error icon.style.animationDelay -> " + error);
         }
@@ -81,10 +127,18 @@ export default class MyPortfolioBanner extends LightningElement {
 
     get aboutMe() {
         let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
-        let aboutMeHtml = this.template.querySelector('.about-me-mobile');
-        if(aboutMeHtml) {
-            aboutMeHtml.innerHTML = aboutMeFieldValue;
+        if(this.isDesktop) {
+            let aboutMeHtml = this.template.querySelector('.about-me');
+            if(aboutMeHtml) {
+                aboutMeHtml.innerHTML = aboutMeFieldValue;
+            }
+        } else {
+            let aboutMeHtml = this.template.querySelector('.about-me-mobile');
+            if(aboutMeHtml) {
+                aboutMeHtml.innerHTML = aboutMeFieldValue;
+            }
         }
+        
         return '';
     }
 
@@ -117,16 +171,20 @@ export default class MyPortfolioBanner extends LightningElement {
 
         if(totalViewsValue != undefined && tempFullName != undefined && aboutMeFieldValue != undefined && !this.renderedCallbackCheck) {
 
-            const aboutMeHtml = this.template.querySelector('.about-me');
-            // //console.log("aboutMeHtml -> " + JSON.stringify(aboutMeHtml));
-            // //console.log(aboutMeHtml);
-            aboutMeHtml.innerHTML = aboutMeFieldValue;
-
+            if(this.isDesktop) {
+                const aboutMeHtml = this.template.querySelector('.about-me');
+                aboutMeHtml.innerHTML = aboutMeFieldValue;
+            } else {
+                const aboutMeHtml = this.template.querySelector('.about-me-mobile');
+                aboutMeHtml.innerHTML = aboutMeFieldValue;
+            }
+            
             // Scroll to the top
-            // const portfolioBanner = this.template.querySelector('.banner');
-            const portfolioBanner = this.template.querySelector('.banner-two-column');
+            const portfolioBanner = this.template.querySelector(this.bannerCss);
             // //console.log('portfolioBanner-> ' + JSON.stringify(portfolioBanner));
-            portfolioBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if(portfolioBanner) {
+                portfolioBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
 
             totalViewsValue++;
             this.renderedCallbackCheck = true;
@@ -157,7 +215,6 @@ export default class MyPortfolioBanner extends LightningElement {
                     return;
                 }
             }, 50); 
-
             this.applyAnimationDelayToIcons();
         }
     }

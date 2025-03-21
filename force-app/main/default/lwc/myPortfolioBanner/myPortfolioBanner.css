@@ -1,25 +1,25 @@
-.banner {
+.banner-mobile {
     background: #fff;
     min-height: 300px;
     text-align: center;
     padding-top: 16px;;
 }
 
-.banner-two-column {
+.banner-desktop {
     background: #fff;
     min-height: 300px;
     text-align: center;
     /* padding-top: 16px;; */
 }
 
-.profile-pic {
+.profile-pic-mobile {
     border-radius: 50%;
     height: 200px;
     width: 200px;
     animation: fadeIn 3s ease-in forwards;
 }
 
-.profile-pic-two-column {
+.profile-pic-desktop {
     border-radius: 50%;
     height: 400px;
     min-width: 400px;
@@ -46,123 +46,110 @@
     align-items: center;
 }
 .icon-css {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    /* padding-top: .5rem;
+    padding-bottom: .5rem; */
     /* display: grid; */
 }
 
-@media (max-width: 1024px) {
-    .banner {
-        display: block;
-    }
-    .banner-two-column {
-        display: none;
-    }
-    .name {
-        font-size: 32px;
-        font-weight: 700;
-        padding-bottom: 1rem;
-    }
-    .icon {
-        display: inline-block;
-        height: 40px;
-        width: 40px;
-        margin: 16px 16px 16px 0px;
-        /* animation: fall 5s cubic-bezier(0.25, 1, 0.5, 1) forwards; */
-        animation: jumpAndFall 1s ease-in-out forwards;
-        opacity: 0; /* Hide icon initially */
-        animation-fill-mode: forwards; /* Ensures animation sticks at final position */
-    }
-
-    .totalViewsClass {
-        font-size: 24px;
-        font-weight: 700;
-        transition: all 0.3s ease-in-out;
-        padding-bottom: 1rem;
-    }
-
-    @keyframes jumpAndFall {
-        0% { transform: translateY(0) rotate(0deg); opacity: 0; }  
-        5% { transform: translateY(-120px) rotate(40deg); opacity: 0.05; }  
-        10% { transform: translateY(-100px) rotate(-35deg); opacity: 0.1; }  
-        15% { transform: translateY(-80px) rotate(30deg); opacity: 0.15; }  
-        20% { transform: translateY(-60px) rotate(-25deg); opacity: 0.2; }  
-        25% { transform: translateY(-40px) rotate(20deg); opacity: 0.25; }  
-        30% { transform: translateY(-20px) rotate(-15deg); opacity: 0.3; }  
-        35% { transform: translateY(0) rotate(0deg); opacity: 0.35; }  
-        40% { transform: translateY(-100px) rotate(35deg); opacity: 0.4; }  
-        45% { transform: translateY(-80px) rotate(-30deg); opacity: 0.45; }  
-        50% { transform: translateY(-60px) rotate(25deg); opacity: 0.5; }  
-        55% { transform: translateY(-40px) rotate(-20deg); opacity: 0.55; }  
-        60% { transform: translateY(-20px) rotate(15deg); opacity: 0.6; }  
-        65% { transform: translateY(0) rotate(0deg); opacity: 0.65; }  
-        70% { transform: translateY(-50px) rotate(25deg); opacity: 0.7; }  
-        75% { transform: translateY(-30px) rotate(-20deg); opacity: 0.75; }  
-        80% { transform: translateY(-10px) rotate(15deg); opacity: 0.8; }  
-        85% { transform: translateY(0) rotate(0deg); opacity: 0.85; }  
-        90% { transform: translateY(-5px) rotate(5deg); opacity: 0.9; }  
-        95% { transform: translateY(0) rotate(2deg); opacity: 0.95; }  
-        100% { transform: translateY(0) rotate(0deg); opacity: 1; }  
-    }
+.icon-mobile {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin: 16px 16px 16px 0px;
+    /* animation: fall 5s cubic-bezier(0.25, 1, 0.5, 1) forwards; */
+    animation: jumpAndFall 1s ease-in-out forwards;
+    opacity: 0; /* Hide icon initially */
+    animation-fill-mode: forwards; /* Ensures animation sticks at final position */
 }
 
-@media (min-width: 1024px) {
-    .banner-two-column {
-        display: block;
-    }
-    .banner {
-        display: none;
-    }
-    .details {
-        text-align: left;
-        padding-top: 4rem;
-    }
-    .name {
-        font-size: 48px;
-        font-weight: 700;
-        padding-bottom: 1rem;
-    }
-    .icon {
-        display: inline-block;
-        height: 40px;
-        width: 40px;
-        margin: 1rem 1rem 0.5rem 1rem;
-        /* animation: fall 5s cubic-bezier(0.25, 1, 0.5, 1) forwards; */
-        animation: jumpAndFall 1.5s ease-in-out forwards;
-        opacity: 0; /* Hide icon initially */
-        animation-fill-mode: forwards; /* Ensures animation sticks at final position */
-    }
+.icon-desktop {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin: 1rem 1rem 0.5rem 1rem;
+    /* animation: fall 5s cubic-bezier(0.25, 1, 0.5, 1) forwards; */
+    animation: fallingdown 1s ease-in-out forwards;
+    opacity: 0; /* Hide icon initially */
+    animation-fill-mode: forwards; /* Ensures animation sticks at final position */
+}
 
-    .totalViewsClass {
-        font-size: 24px;
-        font-weight: 700;
-        transition: all 0.3sease-in-out;
-        padding: 2rem 0px;
-    }
+.totalViewsClass-mobile {
+    font-size: 24px;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out;
+    padding-bottom: 1rem;
+}
 
-    @keyframes jumpAndFall {
-        0% { transform: translateY(-120px); opacity: 0; }  
-        5% { transform: translateY(-100px); opacity: 0.05; }  
-        10% { transform: translateY(-80px); opacity: 0.1; }  
-        15% { transform: translateY(-60px); opacity: 0.15; }  
-        20% { transform: translateY(-40px); opacity: 0.2; }  
-        25% { transform: translateY(-20px); opacity: 0.25; }  
-        30% { transform: translateY(0); opacity: 0.3; }  
-        35% { transform: translateY(-80px); opacity: 0.35; }  
-        40% { transform: translateY(-60px); opacity: 0.4; }  
-        45% { transform: translateY(-40px); opacity: 0.45; }  
-        50% { transform: translateY(-20px); opacity: 0.5; }  
-        55% { transform: translateY(0); opacity: 0.55; }  
-        60% { transform: translateY(-50px); opacity: 0.6; }  
-        65% { transform: translateY(-30px); opacity: 0.65; }  
-        70% { transform: translateY(-10px); opacity: 0.7; }  
-        75% { transform: translateY(0); opacity: 0.75; }  
-        80% { transform: translateY(-5px); opacity: 0.8; }  
-        85% { transform: translateY(0); opacity: 0.85; }  
-        90% { transform: translateY(-2px); opacity: 0.9; }  
-        95% { transform: translateY(0); opacity: 0.95; }  
-        100% { transform: translateY(0); opacity: 1; }  
-    }
+.totalViewsClass-desktop {
+    font-size: 24px;
+    font-weight: 700;
+    transition: all 0.3sease-in-out;
+    padding: 2rem 0px;
+}
+
+.name-desktop {
+    font-size: 48px;
+    font-weight: 700;
+    padding-bottom: 1rem;
+}
+
+.name-mobile {
+    font-size: 32px;
+    font-weight: 700;
+    padding-bottom: 1rem;
+}
+
+.details {
+    text-align: left;
+    padding-top: 4rem;
+}
+
+@keyframes  jumpAndFall{
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }  
+    5% { transform: translateY(-120px) rotate(40deg); opacity: 0.05; }  
+    10% { transform: translateY(-100px) rotate(-35deg); opacity: 0.1; }  
+    15% { transform: translateY(-80px) rotate(30deg); opacity: 0.15; }  
+    20% { transform: translateY(-60px) rotate(-25deg); opacity: 0.2; }  
+    25% { transform: translateY(-40px) rotate(20deg); opacity: 0.25; }  
+    30% { transform: translateY(-20px) rotate(-15deg); opacity: 0.3; }  
+    35% { transform: translateY(0) rotate(0deg); opacity: 0.35; }  
+    40% { transform: translateY(-100px) rotate(35deg); opacity: 0.4; }  
+    45% { transform: translateY(-80px) rotate(-30deg); opacity: 0.45; }  
+    50% { transform: translateY(-60px) rotate(25deg); opacity: 0.5; }  
+    55% { transform: translateY(-40px) rotate(-20deg); opacity: 0.55; }  
+    60% { transform: translateY(-20px) rotate(15deg); opacity: 0.6; }  
+    65% { transform: translateY(0) rotate(0deg); opacity: 0.65; }  
+    70% { transform: translateY(-50px) rotate(25deg); opacity: 0.7; }  
+    75% { transform: translateY(-30px) rotate(-20deg); opacity: 0.75; }  
+    80% { transform: translateY(-10px) rotate(15deg); opacity: 0.8; }  
+    85% { transform: translateY(0) rotate(0deg); opacity: 0.85; }  
+    90% { transform: translateY(-5px) rotate(5deg); opacity: 0.9; }  
+    95% { transform: translateY(0) rotate(2deg); opacity: 0.95; }  
+    100% { transform: translateY(0) rotate(0deg); opacity: 1; }  
+}
+
+@keyframes fallingdown {
+    0% { transform: translateY(-120px); opacity: 0; }  
+    5% { transform: translateY(-100px); opacity: 0.05; }  
+    10% { transform: translateY(-80px); opacity: 0.1; }  
+    15% { transform: translateY(-60px); opacity: 0.15; }  
+    20% { transform: translateY(-40px); opacity: 0.2; }  
+    25% { transform: translateY(-20px); opacity: 0.25; }  
+    30% { transform: translateY(0); opacity: 0.3; }  
+    35% { transform: translateY(-80px); opacity: 0.35; }  
+    40% { transform: translateY(-60px); opacity: 0.4; }  
+    45% { transform: translateY(-40px); opacity: 0.45; }  
+    50% { transform: translateY(-20px); opacity: 0.5; }  
+    55% { transform: translateY(0); opacity: 0.55; }  
+    60% { transform: translateY(-50px); opacity: 0.6; }  
+    65% { transform: translateY(-30px); opacity: 0.65; }  
+    70% { transform: translateY(-10px); opacity: 0.7; }  
+    75% { transform: translateY(0); opacity: 0.75; }  
+    80% { transform: translateY(-5px); opacity: 0.8; }  
+    85% { transform: translateY(0); opacity: 0.85; }  
+    90% { transform: translateY(-2px); opacity: 0.9; }  
+    95% { transform: translateY(0); opacity: 0.95; }  
+    100% { transform: translateY(0); opacity: 1; }  
 }
 
 @keyframes fadeIn {

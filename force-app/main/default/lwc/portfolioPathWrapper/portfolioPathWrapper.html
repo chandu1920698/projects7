@@ -12,7 +12,7 @@
                                         <template if:true={sldsPathValues}>
                                             <template for:each={sldsPathValues} for:item="item">
                                                 <li data-value={item.pItem.label} onclick={handleSelectPath} key={item.pathIndex} class={item.classList} role="presentation">
-                                                    <div class="slds-path__link" id={item.pItem.label}>
+                                                    <div class="slds-path__link" id={item.pItem.label} title={item.pItem.label}>
                                                         <span class="slds-path__title path-cusrsor">{item.pItem.label}</span>
                                                     </div>
                                                 </li>
