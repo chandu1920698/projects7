@@ -81,3 +81,9 @@ form {
     margin-bottom: 12px;
     line-height: 1.5;
 }
+
+.spinner-center {
+    position: sticky;
+    top: 50%;
+    width: 100%;
+}
