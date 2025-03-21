@@ -1,5 +1,5 @@
 import { LightningElement, track, api } from 'lwc';
-
+import FORM_FACTOR from "@salesforce/client/formFactor";
 const PORTFOLIO_OBJECT_API_NAME = 'Portfolio__c';
 
 export default class PortfolioPathWrapper extends LightningElement {
@@ -10,6 +10,9 @@ export default class PortfolioPathWrapper extends LightningElement {
     currentPathIndex = 0;
 
     @track showSpinner = true;
+    @track deviceFromFactor = FORM_FACTOR;
+    @track isDesktop = this.deviceFromFactor == 'Large' || this.deviceFromFactor == 'Medium' ? true : false;
+    @track isRendered = false;
     @track sldsPathValues = [
         {
             pItem : {
@@ -69,6 +72,11 @@ export default class PortfolioPathWrapper extends LightningElement {
     showEducation = false;
     showCertifications = false;
     showContactMe = false;
+
+    connectedCallback() {
+        this.isDesktop = this.deviceFromFactor == 'Large' || this.deviceFromFactor == 'Medium' ? true : false;
+        // console.log("this.isDesktop -> " + this.isDesktop);
+    }
 
     handleSelectPath(event) {
         //console.log("event -> "+ JSON.stringify(event));
@@ -186,14 +194,6 @@ export default class PortfolioPathWrapper extends LightningElement {
         //console.log("Event -> " + JSON.stringify(event));
         //console.log("event.detail.showSpinner -> " + event.detail.showSpinner);
         //console.log("this.showSpinner -> " + this.showSpinner);
-        // let timeoutValue = 3000;
-        // setTimeout(() => {
-        //     if(event.detail.showSpinner == true) {
-        //         timeoutValue = 0;
-        //     }
-        //     this.showSpinner = event.detail.showSpinner;
-        // }, timeoutValue);
-
         if(event.detail.showSpinner == true) {
             this.showSpinner = event.detail.showSpinner;
         } else {

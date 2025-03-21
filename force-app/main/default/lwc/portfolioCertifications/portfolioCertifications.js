@@ -1,5 +1,6 @@
 import { LightningElement, wire, api, track } from 'lwc';
 import { getRelatedListRecords } from 'lightning/uiRelatedListApi';
+import FORM_FACTOR from "@salesforce/client/formFactor";
 
 export default class PortfolioCertifications extends LightningElement {
 
@@ -8,6 +9,8 @@ export default class PortfolioCertifications extends LightningElement {
     @track certificationList = [];
     @track salesforceCertifications = [];
     @track otherCertifications = [];
+    @track showSpinner;
+    @track deviceFromFactor = FORM_FACTOR;
 
     @wire(getRelatedListRecords, {
         parentRecordId : '$recordId',
@@ -17,12 +20,15 @@ export default class PortfolioCertifications extends LightningElement {
         'Certification__c.Is_Salesforce_Certification__c',
         'Certification__c.Certification_Url__c']
     })wireGetCertifications({data, error}) {
-
-        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-            message: 'Event Received',  
-            showSpinner : true, 
-        } });
-        this.dispatchEvent(loadDataEvent);
+        if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+            this.showSpinner = true;
+        } else  {
+            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                message: 'Event Received',  
+                showSpinner : true, 
+            } });
+            this.dispatchEvent(loadDataEvent);
+        }
 
         if(data) {
             //console.log("data -> " + JSON.stringify(data));
@@ -61,11 +67,15 @@ export default class PortfolioCertifications extends LightningElement {
             // //console.log("this.otherCertifications -> " + JSON.stringify(this.otherCertifications));
             if(this.salesforceCertifications.length != 0 || this.salesforceCertifications != 0) {
 
-                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-                    message: 'Event Received',  
-                    showSpinner : false, 
-                } });
-                this.dispatchEvent(loadDataEvent);
+                if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+                    this.showSpinner = false;
+                } else  {
+                    const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                        message: 'Event Received',  
+                        showSpinner : false, 
+                    } });
+                    this.dispatchEvent(loadDataEvent);
+                }
             }
         } else {
             //console.log("error -> " + JSON.stringify(error));

@@ -7,7 +7,7 @@ import METHODOLOGIES from '@salesforce/schema/Portfolio__c.Software_Development_
 import DATABASE from '@salesforce/schema/Portfolio__c.Databases__c';
 import OPERATING_SYSTEMS from '@salesforce/schema/Portfolio__c.Operating_Systems__c';
 import PROGRAMMING_LANGUAGES from '@salesforce/schema/Portfolio__c.Programming_Languages__c';
-
+import FORM_FACTOR from "@salesforce/client/formFactor";
 
 export default class PortfolioSkills extends LightningElement {
     @api recordId;
@@ -19,19 +19,22 @@ export default class PortfolioSkills extends LightningElement {
     databases = [];
     operatingSystems = [];
     programmingLanguages = [];
-
-    // @track showSpinner = true;
+    showSpinner;
+    deviceFromFactor = FORM_FACTOR;
 
     @wire(getRecord, {
         recordId:'$recordId',
         fields:[TECH_SKILLS, SOFT_SKILLS, SOFTWARE, METHODOLOGIES, DATABASE, OPERATING_SYSTEMS, PROGRAMMING_LANGUAGES]
     })skillHandler({data, error}){
-        // this.showSpinner = true;
-        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-            message: 'Event Received',  
-            showSpinner : true, 
-        } });
-        this.dispatchEvent(loadDataEvent);
+        if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+            this.showSpinner = true;
+        } else  {
+            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                message: 'Event Received',  
+                showSpinner : true, 
+            } });
+            this.dispatchEvent(loadDataEvent);
+        }
 
         if(data){
             //console.log("Skills Data", JSON.stringify(data));
@@ -61,13 +64,16 @@ export default class PortfolioSkills extends LightningElement {
         //console.log("this.programmingLanguages -> ", JSON.stringify(this.programmingLanguages));
 
         if(this.techSkills || this.softSkills || this.methodologies || this.toolsSkills || this.databases || this.operatingSystems || this.programmingLanguages) {
-            // this.showSpinner = false;
 
-            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-                message: 'Event Received',  
-                showSpinner : false, 
-            } });
-            this.dispatchEvent(loadDataEvent);
+            if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+                this.showSpinner = false;
+            } else  {
+                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                    message: 'Event Received',  
+                    showSpinner : false, 
+                } });
+                this.dispatchEvent(loadDataEvent);
+            }
 
         }
         

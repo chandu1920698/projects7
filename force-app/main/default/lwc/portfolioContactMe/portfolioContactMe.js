@@ -1,7 +1,10 @@
-import { LightningElement,api } from 'lwc';
+import { LightningElement,api, track, wire } from 'lwc';
 import sendEmail from '@salesforce/apex/ContactMeSendEmailController.sendMail';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import ToastContainer from 'lightning/toastContainer';
+import CONTACT_ME from '@salesforce/schema/Portfolio__c.Contact_Me__c';
+import {getRecord, getFieldValue} from 'lightning/uiRecordApi';
+import FORM_FACTOR from "@salesforce/client/formFactor";
 
 export default class PortfolioContactMe extends LightningElement {
 
@@ -13,17 +16,75 @@ export default class PortfolioContactMe extends LightningElement {
     isButtonDisabled = true;
     isShowModal = false;
     messageHeaderGreeting = '';
-    isRendered = false;
+    @track isRendered = false;
+    showSpinner;
+    deviceFromFactor = FORM_FACTOR;
+    isDesktop = false;
+
+    @track contactMeHtmlInfo;
+
+    get centerContainerCss() {
+        if(this.deviceFromFactor == 'Large' || this.deviceFromFactor == 'Medium') {
+            return 'center-container-desktop';
+        } else {    
+            return 'center-container-mobile';
+        }
+    }
+
+    get contactMeTextCss() {
+        if(this.deviceFromFactor == 'Large' || this.deviceFromFactor == 'Medium') {
+            return 'contact-me-text-desktop';
+        } else {    
+            return 'contact-me-text-mobile';
+        }
+    }
 
     connectedCallback() {
         const toastContainer = ToastContainer.instance();
         toastContainer.toastPosition = 'top-center';
-        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-            message: 'Event Received',  
-            showSpinner : true, 
-        } });
-        this.dispatchEvent(loadDataEvent);
+        // console.log("this.recordId -> " + this.recordId);
+
+        if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+            this.showSpinner = true;
+            this.isDesktop = true;
+        } else  {
+            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                message: 'Event Received',  
+                showSpinner : true, 
+            } });
+            this.dispatchEvent(loadDataEvent);
+        } 
     }
+
+    @wire(getRecord, {
+            recordId:'$recordId',
+            fields:[CONTACT_ME]
+        })getContactMe({data, error}){   
+            if(data){
+                this.contactMeHtmlInfo = getFieldValue(data, CONTACT_ME);
+                // console.log("this.contactMeHtmlInfo  -> " +  JSON.stringify(this.contactMeHtmlInfo));
+
+                if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+                    this.showSpinner = false;
+                } else  {
+                    const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                        message: 'Event Received',  
+                        showSpinner : false, 
+                    } });
+                    this.dispatchEvent(loadDataEvent);
+                }
+
+                const contactMeHtml = this.template.querySelector('.' + this.contactMeTextCss);
+                if(this.contactMeHtmlInfo != undefined && contactMeHtml) {
+                    // console.log("renderedCallback this.contactMeHtmlInfo -> " + JSON.stringify(this.contactMeHtmlInfo));
+                    // console.log("renderedCallback -> " + JSON.stringify(contactMeHtml));
+                    contactMeHtml.innerHTML = this.contactMeHtmlInfo;
+                }
+            }
+            if(error){
+                console.error("Skills error", error);
+            }
+        }
 
     handleInputChange(event) {
         //console.log("Inside handleInputChange");
@@ -100,14 +161,24 @@ export default class PortfolioContactMe extends LightningElement {
     }
 
     renderedCallback() {
-        if(!this.isRendered) {
+        if(!this.isRendered && this.contactMeHtmlInfo != undefined) {
             this.isRendered = true;
-            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-                message: 'Event Received',  
-                showSpinner : false, 
-            } });
-            this.dispatchEvent(loadDataEvent);
+            if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+                this.showSpinner = false;
+            } else  {
+                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                    message: 'Event Received',  
+                    showSpinner : false, 
+                } });
+                this.dispatchEvent(loadDataEvent);
+            }
+
+            const contactMeHtml = this.template.querySelector('.' + this.contactMeTextCss);
+            if(this.contactMeHtmlInfo != undefined && contactMeHtml) {
+                console.log("renderedCallback this.contactMeHtmlInfo -> " + JSON.stringify(this.contactMeHtmlInfo));
+                console.log("renderedCallback -> " + JSON.stringify(contactMeHtml));
+                contactMeHtml.innerHTML = this.contactMeHtmlInfo;
+            }   
         }
-        
     }
 }

@@ -7,14 +7,22 @@ export default class PortfolioWorkExperience extends LightningElement {
     @api recordId;
     @api isEducation;
 
-    // @track showSpinner = true;
     @track workExperienceList = [];
     @track isDesktop = true;
 
+    showSpinner;
+    deviceFromFactor = FORM_FACTOR;
+
     connectedCallback() {
-        //console.log("PortfolioWorkExperience - recordId => " +  this.recordId);
-        if(FORM_FACTOR == 'Small' || FORM_FACTOR == 'Medium') {
-            this.isDesktop = false;
+        if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+            this.isDesktop = true;
+            this.showSpinner = true;
+        } else  {
+            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                message: 'Event Received',  
+                showSpinner : true, 
+            } });
+            this.dispatchEvent(loadDataEvent);
         }
     }
     @wire(getRelatedListRecords, {
@@ -71,12 +79,15 @@ export default class PortfolioWorkExperience extends LightningElement {
         this.workExperienceList = this.workExperienceList.filter(item => item != null);
         //console.log("this.workExperienceList -> " + JSON.stringify(this.workExperienceList));
         if(this.workExperienceList.length > 0) {
-            // this.showSpinner = false;
-            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-                message: 'Event Received',  
-                showSpinner : false,
-            } });
-            this.dispatchEvent(loadDataEvent);
+            if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+                this.showSpinner = false;
+            } else  {
+                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                    message: 'Event Received',  
+                    showSpinner : false, 
+                } });
+                this.dispatchEvent(loadDataEvent);
+            }
         }
     }
 

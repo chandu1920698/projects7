@@ -1,20 +1,26 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getProjects from '@salesforce/apex/ProjectsControllerClass.getProjects';
+import FORM_FACTOR from "@salesforce/client/formFactor";
 
 export default class PortfolioPersonalProjects extends LightningElement {
 
     @api recordId;
-
-    // @track showSpinner = true;
     @track projectDetails;
 
+    showSpinner;
+    deviceFromFactor = FORM_FACTOR;
+
     connectedCallback() {
-        // this.showSpinner = true;
-        const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-            message: 'Event Received',  
-            showSpinner : true, 
-        } });
-        this.dispatchEvent(loadDataEvent);
+        
+        if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+            this.showSpinner = true;
+        } else  {
+            const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                message: 'Event Received',  
+                showSpinner : true, 
+            } });
+            this.dispatchEvent(loadDataEvent);
+        }
         
         //console.log('connectedCallback PortfolioPersonalProjects this.recordId => ' + JSON.stringify(this.recordId));
         this.getProjectDetails();
@@ -60,12 +66,15 @@ export default class PortfolioPersonalProjects extends LightningElement {
             //console.log("this.projectDetails -> " + JSON.stringify(this.projectDetails));
 
             if(this.projectDetails.length != 0) {
-                // this.showSpinner = false;
-                const loadDataEvent = new CustomEvent('loaddata', { detail: { 
-                    message: 'Event Received',  
-                    showSpinner : false,
-                } });
-                this.dispatchEvent(loadDataEvent);
+                if(this.deviceFromFactor == "Large" || this.deviceFromFactor == "Medium") {
+                    this.showSpinner = false;
+                } else  {
+                    const loadDataEvent = new CustomEvent('loaddata', { detail: { 
+                        message: 'Event Received',  
+                        showSpinner : false, 
+                    } });
+                    this.dispatchEvent(loadDataEvent);
+                }
             }
         }).catch(error => {
             //console.log("connectedCallback PortfolioPersonalProjects this.recordId => " + JSON(error));

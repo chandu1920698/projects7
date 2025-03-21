@@ -1,7 +1,7 @@
 <template>
-    <!-- <template if:true={showSpinner}>
+    <template if:true={showSpinner}>
         <lightning-spinner alternative-text="Loading" class="spinner-center"></lightning-spinner>
-    </template> -->
+    </template>
     
     <template if:true={salesforceCertifications}>
         <h2 class="slds-text-heading_medium slds-var-m-around_medium">Salesforce Certifications</h2>
@@ -13,8 +13,6 @@
                             <img src={certificate.imageUrl} alt={certificate.certName} style="width:100%" class="hover-image">
                             <lightning-icon icon-name='utility:new_window' alternative-text='View in LinkedIn' size='x-small' title='View in LinkedIn'></lightning-icon>
                         </a>
-                        <!-- <p>{certificate.certName}</p>
-                        <p><button>{certificate.certName}</button></p> -->
                     </div>
                 </lightning-layout-item>
             </template>

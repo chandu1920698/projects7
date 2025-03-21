@@ -1,9 +1,7 @@
 <template>
-
-    <!-- <template if:true={showSpinner}>
+    <template if:true={showSpinner}>
         <lightning-spinner alternative-text="Loading" class="spinner-center"></lightning-spinner>
-    </template> -->
-
+    </template>
     <ul class="slds-timeline">
         <template for:each={workExperienceList} for:item="work">
             <li key={work.id} class="slds-m-around_small">

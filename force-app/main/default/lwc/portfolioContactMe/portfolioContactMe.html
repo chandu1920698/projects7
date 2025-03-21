@@ -1,105 +1,100 @@
 <template>
-    <div class="show-on-desktop-view">
-        <div class="slds-grid slds-gutters">
-            <div class="slds-col slds-size_1-of-2">
-                <div class="center-container">
-                    <div class="contact-me-text">
-                        <div>
-                            Let’s Connect! 🤝
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" class="spinner-center"></lightning-spinner>
+    </template>
+    <template if:true={isDesktop}>
+        <!-- <div class="show-on-desktop-view"> -->
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class={centerContainerCss}>
+                        <div class={contactMeTextCss}>
                         </div>
-                        <div>
-                            Hey there! I’m thrilled that you stopped by my portfolio. Whether you have an exciting project in mind, a collaboration opportunity, or just want to say hello—I’d love to hear from you!
-                            Drop me a message, and I’ll get back to you as soon as possible. Let’s transform ideas into reality, create something incredible together, and maybe even spark the next big innovation!
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <!-- <div class="c-container"> -->
+                        <div class={centerContainerCss}>
+                            <div class="container">
+                                <form onsubmit={handleSendMessage}>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <lightning-input-rich-text
+                                                value={message}
+                                                onchange={handleInputChange}
+                                                placeholder="Your Message"
+                                                name="message">
+                                            </lightning-input-rich-text>
+                                        </div>
+                                    </div>
+                                    <div class="custom-button">
+                                        <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div>
-                            Your thoughts, feedback, and questions are always welcome. Don’t hesitate to reach out—I look forward to connecting with you!
+                        
+                    <!-- </div> -->
+                </div>
+            </div>
+        <!-- </div> -->
+    </template>
+    
+    <template if:false={isDesktop}>
+        <!-- <div class="show-on-mobile-view"> -->
+            <div class="slds-grid slds-grid_vertical slds-gutters">
+                <div class="slds-col">
+                    <div class={centerContainerCss}>
+                        <div class={contactMeTextCss}>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col">
+                    <div class="c-container">
+                        <div class={centerContainerCss}>
+                            <div class="container">
+                                <form onsubmit={handleSendMessage}>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <lightning-input-rich-text
+                                                value={message}
+                                                onchange={handleInputChange}
+                                                placeholder="Your Message"
+                                                name="message">
+                                            </lightning-input-rich-text>
+                                        </div>
+                                    </div>
+                                    <div class="custom-button">
+                                        <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="slds-col slds-size_1-of-2">
-                <div class="c-container center-container">
-                    <div class="container">
-                        <form onsubmit={handleSendMessage}>
-                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
-                                <div class="slds-form-element__control">
-                                    <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
-                                </div>
-                            </div>
-                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
-                                <div class="slds-form-element__control">
-                                    <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
-                                </div>
-                            </div>
-                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
-                                <div class="slds-form-element__control">
-                                    <lightning-input-rich-text
-                                        value={message}
-                                        onchange={handleInputChange}
-                                        placeholder="Your Message"
-                                        name="message">
-                                    </lightning-input-rich-text>
-                                </div>
-                            </div>
-                            <div class="custom-button">
-                                <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	<div class="show-on-mobile-view">
-        <div class="slds-grid slds-grid_vertical slds-gutters">
-            <div class="slds-col">
-                <div class="center-container">
-                    <div class="contact-me-text">
-                        <div>
-                            Get in Touch
-                        </div>
-                        <div>
-                            Please fill out the form below, and I will get back to you as soon as possible. Whether you are interested in discussing new opportunities, collaborations, or need more information about my work, don’t hesitate to send a message.
-                        </div>
-                        <div>
-                            Thank you for visiting my portfolio! If you have any questions, feedback, or just want to say hello, feel free to reach out. I’d love to hear from you.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slds-col">
-                <div class="c-container center-container">
-                    <div class="container">
-                        <form onsubmit={handleSendMessage}>
-                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
-                                <div class="slds-form-element__control">
-                                    <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
-                                </div>
-                            </div>
-                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
-                                <div class="slds-form-element__control">
-                                    <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
-                                </div>
-                            </div>
-                            <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
-                                <div class="slds-form-element__control">
-                                    <lightning-input-rich-text
-                                        value={message}
-                                        onchange={handleInputChange}
-                                        placeholder="Your Message"
-                                        name="message">
-                                    </lightning-input-rich-text>
-                                </div>
-                            </div>
-                            <div class="custom-button">
-                                <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- </div> -->
+    </template>
+	
 
     <template if:true={isShowModal}>
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-labelledby="modal-heading-01" aria-modal="true">

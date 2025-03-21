@@ -1,11 +1,12 @@
 .slds-spinner_container {
     position: absolute;
-    margin: 1rem;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    height: 1.5rem;
-    left: 80%;
+    /* margin: 1rem; */
+    top: 2.2rem;
+    /* right: 0; */
+    /* bottom: 0; */
+    height: fit-content;
+    width: fit-content;
+    left: 90%;
     z-index: 9050;
     background: #f6c403;
     visibility: visible;
