@@ -1,5 +1,5 @@
 import { LightningElement, wire, api, track} from 'lwc';
-import PORTFOLIO_ASSETS from "@salesforce/resourceUrl/PortfolioAssets";
+// import PORTFOLIO_ASSETS from "@salesforce/resourceUrl/PortfolioAssets";
 import {getRecord, getFieldValue} from 'lightning/uiRecordApi';
 import FULL_NAME from '@salesforce/schema/Portfolio__c.FullName__c';
 import COMPANY_NAME from '@salesforce/schema/Portfolio__c.CompanyName__c';
@@ -13,13 +13,14 @@ import FORM_FACTOR from "@salesforce/client/formFactor";
 
 export default class MyPortfolioBanner extends LightningElement {
 
-    linkedInIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/linkedin.svg";
-    leetCodeIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/leetcode.svg";
-    youtubeIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/youtube.svg";
-    githubIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/github.svg";
-    trailheadIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/trailhead1.svg";
-    twitterIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/twitter.svg";
-    blogIcon = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/blog.svg";
+    linkedInIcon; //PORTFOLIO_ASSETS + "/PortfolioAssets/Social/linkedin.svg";
+    leetCodeIcon // = PORTFOLIO_ASSETS + "/PortfolioAssets/Social/leetcode.svg";
+    youtubeIcon //= PORTFOLIO_ASSETS + "/PortfolioAssets/Social/youtube.svg";
+    githubIcon //= PORTFOLIO_ASSETS + "/PortfolioAssets/Social/github.svg";
+    trailheadIcon //= PORTFOLIO_ASSETS + "/PortfolioAssets/Social/trailhead1.svg";
+    twitterIcon //= PORTFOLIO_ASSETS + "/PortfolioAssets/Social/twitter.svg";
+    blogIcon //= PORTFOLIO_ASSETS + "/PortfolioAssets/Social/blog.svg";
+    profilePic; 
     isDesktop = FORM_FACTOR == 'Large' ? true : false;
 
     renderedCallbackCheck = false;
@@ -38,7 +39,49 @@ export default class MyPortfolioBanner extends LightningElement {
     
     connectedCallback() {
         //console.log("this.recordId -> " + JSON.stringify(this.recordId));
+        
         this.applyAnimationDelayToIcons();
+        
+        const profilePicTag = document.querySelector("meta[name='profilePic']");
+        if (profilePicTag) {
+            this.profilePic = profilePicTag.content;
+        }
+
+        const linkedInIconTag = document.querySelector("meta[name='linkedInIcon']");
+        if (linkedInIconTag) {
+            this.linkedInIcon = linkedInIconTag.content;
+        }
+
+        const leetCodeIconTag = document.querySelector("meta[name='leetCodeIcon']");
+        if (leetCodeIconTag) {
+            this.leetCodeIcon = leetCodeIconTag.content;
+        }
+
+        const youtubeIconTag = document.querySelector("meta[name='youtubeIcon']");
+        if (youtubeIconTag) {
+            this.youtubeIcon = youtubeIconTag.content;
+        }
+
+        const githubIconTag = document.querySelector("meta[name='githubIcon']");
+        if (githubIconTag) {
+            this.githubIcon = githubIconTag.content;
+        }
+
+        const trailheadIconTag = document.querySelector("meta[name='trailheadIcon']");
+        if (trailheadIconTag) {
+            this.trailheadIcon = trailheadIconTag.content;
+        }
+
+        const twitterIconTag = document.querySelector("meta[name='twitterIcon']");
+        if (twitterIconTag) {
+            this.twitterIcon = linkedInIconTag.content;
+        }
+
+        const blogIconTag = document.querySelector("meta[name='blogIcon']");
+        if (blogIconTag) {
+            this.blogIcon = blogIconTag.content;
+        }
+        
     }
 
     get bannerCss() {
@@ -92,7 +135,7 @@ export default class MyPortfolioBanner extends LightningElement {
             if(iconsList?.length > 0) {
                 if(this.isDesktop) {
                     iconsList.forEach((icon, index) => {
-                        icon.style = `animation-delay: ${(iconsList.length - index)}s;`;
+                        icon.style = `animation-delay: ${(iconsList.length - index)/2}s;`;
                     });
                 } else {
                     let randomNumbers = new Set();
@@ -144,19 +187,21 @@ export default class MyPortfolioBanner extends LightningElement {
 
     get profilePicUrl() {
 
-        const htmlString = getFieldValue(this.portfolioData?.data, PROFILE_PIC);
+        // const htmlString = getFieldValue(this.portfolioData?.data, PROFILE_PIC);
 
-        // Create a DOMParser to parse the string
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
+        // // Create a DOMParser to parse the string
+        // const parser = new DOMParser();
+        // const doc = parser.parseFromString(htmlString, 'text/html');
 
-        // Find the <img> element
-        const imgElement = doc.querySelector('img');
+        // // Find the <img> element
+        // const imgElement = doc.querySelector('img');
 
-        // Get the src attribute value
-        let imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+        // // Get the src attribute value
+        // let imageUrl = imgElement ? imgElement.getAttribute('src') : null;
 
-        return imageUrl;
+        // return imageUrl;
+
+        return this.profilePic
     }
 
     renderedCallback() {
