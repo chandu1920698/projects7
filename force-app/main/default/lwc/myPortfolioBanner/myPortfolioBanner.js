@@ -1,13 +1,4 @@
 import { LightningElement, wire, api, track} from 'lwc';
-// import PORTFOLIO_ASSETS from "@salesforce/resourceUrl/PortfolioAssets";
-import {getRecord, getFieldValue} from 'lightning/uiRecordApi';
-import FULL_NAME from '@salesforce/schema/Portfolio__c.FullName__c';
-import COMPANY_NAME from '@salesforce/schema/Portfolio__c.CompanyName__c';
-import DESIGNATION from '@salesforce/schema/Portfolio__c.Designation__c';
-import TOTAL_VIEWS from '@salesforce/schema/Portfolio__c.Total_Views__c';
-import COMPANY_LOCATION from '@salesforce/schema/Portfolio__c.CompanyLocation__c';
-import PROFILE_PIC from '@salesforce/schema/Portfolio__c.Profile_Pic__c';
-import ABOUT_ME from '@salesforce/schema/Portfolio__c.About_Me__c';
 import updatePortfolioTotalViews from '@salesforce/apex/PortfolioController.updatePortfolioTotalViews';
 import FORM_FACTOR from "@salesforce/client/formFactor";
 
@@ -36,9 +27,13 @@ export default class MyPortfolioBanner extends LightningElement {
     @api twitterUrl //= "https://github.com/chandu1920698";
     @api blogUrl //= "https://github.com/chandu1920698";
 
+    @api portfolioWrapperComponentData;
+
     
     connectedCallback() {
-        //console.log("this.recordId -> " + JSON.stringify(this.recordId));
+        // console.log("this.recordId -> " + JSON.stringify(this.recordId));
+
+        // console.log("this.portfolioWrapperComponentData -> " + JSON.stringify(this.portfolioWrapperComponentData));
         
         this.applyAnimationDelayToIcons();
         
@@ -154,22 +149,34 @@ export default class MyPortfolioBanner extends LightningElement {
         }
     }
 
-
-    @wire(getRecord, {recordId : '$recordId', fields : [FULL_NAME, COMPANY_LOCATION, COMPANY_NAME, DESIGNATION, PROFILE_PIC, TOTAL_VIEWS, ABOUT_ME]})
-    portfolioData;
-
     get companyName() {
-        return getFieldValue(this.portfolioData?.data, COMPANY_NAME);
+        // return getFieldValue(this.portfolioData?.data, COMPANY_NAME);
+        // GraphQl
+        // return this.portfolioWrapperComponentData?.companyName?.value;
+
+        return this.portfolioWrapperComponentData?.companyName;
     }
     get desigationName() {
-        return getFieldValue(this.portfolioData?.data, DESIGNATION);
+        // return getFieldValue(this.portfolioData?.data, DESIGNATION);
+        // GraphQl
+        // return this.portfolioWrapperComponentData?.designationName?.value;
+
+        return this.portfolioWrapperComponentData?.designationName;
     }
     get companyLocation() {
-        return getFieldValue(this.portfolioData?.data, COMPANY_LOCATION);
+        // return getFieldValue(this.portfolioData?.data, COMPANY_LOCATION);
+        // GraphQl
+        // return this.portfolioWrapperComponentData?.companyLocation?.value;
+
+        return this.portfolioWrapperComponentData?.companyLocation;
     }
 
     get aboutMe() {
-        let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
+        // let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
+        // GraphQl
+        // let aboutMeFieldValue = this.portfolioWrapperComponentData?.aboutMe?.value;
+        let aboutMeFieldValue = this.portfolioWrapperComponentData?.aboutMe;
+        console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
         if(this.isDesktop) {
             let aboutMeHtml = this.template.querySelector('.about-me');
             if(aboutMeHtml) {
@@ -205,14 +212,23 @@ export default class MyPortfolioBanner extends LightningElement {
     }
 
     renderedCallback() {
-        let totalViewsValue = getFieldValue(this.portfolioData?.data, TOTAL_VIEWS);
+        // let totalViewsValue = getFieldValue(this.portfolioData?.data, TOTAL_VIEWS);
+        // GraphQl
+        // let totalViewsValue = this.portfolioWrapperComponentData?.pageImpressions?.value;
+        let totalViewsValue = this.portfolioWrapperComponentData?.pageImpressions;
         // //console.log("totalViewsValue -> " + totalViewsValue);
 
-        let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
+        // let tempFullName = getFieldValue(this.portfolioData?.data, FULL_NAME);
+        // GraphQl
+        // let tempFullName = this.portfolioWrapperComponentData?.fullName?.value;
+        let tempFullName = this.portfolioWrapperComponentData?.fullName;
         // //console.log("tempFullName -> " + JSON.stringify(tempFullName));
 
-        let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
-        // //console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
+        // let aboutMeFieldValue = getFieldValue(this.portfolioData?.data, ABOUT_ME);
+        // GraphQl
+        // let aboutMeFieldValue = this.portfolioWrapperComponentData?.aboutMe?.value;
+        let aboutMeFieldValue = this.portfolioWrapperComponentData?.aboutMe;
+        // console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
 
         if(totalViewsValue != undefined && tempFullName != undefined && aboutMeFieldValue != undefined && !this.renderedCallbackCheck) {
 
