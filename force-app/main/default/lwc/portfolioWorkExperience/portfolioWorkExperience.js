@@ -38,6 +38,7 @@ export default class PortfolioWorkExperience extends LightningElement {
         'Work_Experience__c.Company_Name__c',
         'Work_Experience__c.Is_Education__c'],
         // WHERE : "Work_Experience__c.Is_Education__c : $isEducation",
+        sortBy: ['-Work_Experience__c.Start_Date__c']
     })workExperienceHandler({data, error}) {
         // this.showSpinner = true;
         const loadDataEvent = new CustomEvent('loaddata', { detail: { 
@@ -55,7 +56,7 @@ export default class PortfolioWorkExperience extends LightningElement {
     };
 
     formatWorkExperience(data) {
-        this.workExperienceList = [...data.records].reverse().map(item => {
+        this.workExperienceList = [...data.records].map(item => {
             let id = item.id;
             const {Start_Date__c, Job_End_Date__c, Role__c, Work_Location__c, Is_Current__c, Description__c, Company_Name__c, Is_Education__c} = item.fields;
             
