@@ -1,0 +1,69 @@
+.portfolioWrapperClass {
+    padding: 16px;
+    background-color:  #f6c403;
+}
+
+.accordion-wrapper {
+    background: #ffffff;
+}
+
+.show-tabs-on-desktop-view {
+    display: block;
+}
+
+.show-accordion-on-mobile-view {
+    display: none;
+}
+
+.path-cusrsor {
+    cursor: pointer;
+}
+
+/* @media (max-width: 1024px) {
+    .show-tabs-on-desktop-view {
+        display: none;
+    }
+    .show-accordion-on-mobile-view {
+        display: block;
+    }
+} */
+
+.loading-spinner {
+    position: relative;
+}
+
+/* .transition-time {
+    transition: 1s;
+} */
+/* 
+.slds-path__item {
+    transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.slds-path__item.slds-is-current {
+    animation: fadeIn 0.8s ease-in-out;
+    background-color: var(--lwc-colorBackgroundHighlight);
+}
+
+.slds-path__item.slds-was-current {
+    animation: fadeOut 0.8s ease-in-out;
+    background-color: var(--lwc-colorBackground);
+}
+
+@keyframes fadeIn {
+    from {
+        background-color: var(--lwc-colorBackground); 
+    }
+    to {
+        background-color: var(--lwc-colorBackgroundHighlight); 
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        background-color: var(--lwc-colorBackgroundHighlight); 
+    }
+    to {
+        background-color: var(--lwc-colorBackground);
+    }
+} */

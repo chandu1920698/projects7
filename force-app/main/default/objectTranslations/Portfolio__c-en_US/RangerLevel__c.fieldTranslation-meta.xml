@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Ranger Level --></label>
+    <name>RangerLevel__c</name>
+    <picklistValues>
+        <masterLabel>Adventurer</masterLabel>
+        <translation><!-- Adventurer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>All star ranger</masterLabel>
+        <translation><!-- All star ranger --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Double star ranger</masterLabel>
+        <translation><!-- Double star ranger --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Expeditioner</masterLabel>
+        <translation><!-- Expeditioner --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Explorer</masterLabel>
+        <translation><!-- Explorer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Five star ranger</masterLabel>
+        <translation><!-- Five star ranger --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Four star ranger</masterLabel>
+        <translation><!-- Four star ranger --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Hiker</masterLabel>
+        <translation><!-- Hiker --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Mountaineer</masterLabel>
+        <translation><!-- Mountaineer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Ranger</masterLabel>
+        <translation><!-- Ranger --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Scout</masterLabel>
+        <translation><!-- Scout --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Triple star ranger</masterLabel>
+        <translation><!-- Triple star ranger --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

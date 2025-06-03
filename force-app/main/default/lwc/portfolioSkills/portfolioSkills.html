@@ -1,0 +1,75 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" class="spinner-center"></lightning-spinner>
+    </template>
+	<div class="slds-p-around_small slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+        <div class="skills">
+            <template if:true={programmingLanguages}>
+                <div class="card slds-theme_shade">
+                    <div class="card-title">Programming</div>
+                    <div class="card-elements">
+                        <template for:each={programmingLanguages} for:item="programmingLanguage">
+                            <lightning-badge key={programmingLanguage} label={programmingLanguage} 
+                                class="slds-badge slds-var-m-bottom_medium"></lightning-badge>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template if:true={techSkills}>
+                <div class="card slds-theme_shade">
+                    <div class="card-title">Technologies/Frameworks</div>
+                    <div class="card-elements">
+                        <template for:each={techSkills} for:item="techSkill">
+                            <lightning-badge key={techSkill} label={techSkill} 
+                                class="slds-badge slds-var-m-bottom_medium"></lightning-badge>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template if:true={toolsSkills}>
+                <div class="card slds-theme_shade">
+                    <div class="card-title">Other Tools</div>
+                    <div class="card-elements">
+                        <template for:each={toolsSkills} for:item="toolsSkill">
+                            <lightning-badge key={toolsSkill} label={toolsSkill} 
+                                class="slds-badge slds-var-m-bottom_medium"></lightning-badge>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template if:true={databases}>
+                <div class="card slds-theme_shade">
+                    <div class="card-title">Databases</div>
+                    <div class="card-elements">
+                        <template for:each={databases} for:item="database">
+                            <lightning-badge key={database} label={database} 
+                                class="slds-badge slds-var-m-bottom_medium"></lightning-badge>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template if:true={softSkills}>
+                <div class="card slds-theme_shade">
+                    <div class="card-title">Soft Skills</div>
+                    <div class="card-elements">
+                        <template for:each={softSkills} for:item="softSkill">
+                            <lightning-badge key={softSkill} label={softSkill} 
+                                class="slds-badge slds-var-m-bottom_medium"></lightning-badge>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template if:true={operatingSystems}>
+                <div class="card slds-theme_shade">
+                    <div class="card-title">Operating Systems</div>
+                    <div class="card-elements">
+                        <template for:each={operatingSystems} for:item="operatingSystem">
+                            <lightning-badge key={operatingSystem} label={operatingSystem} 
+                                class="slds-badge slds-var-m-bottom_medium"></lightning-badge>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+	</div>
+</template>

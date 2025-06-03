@@ -1,0 +1,37 @@
+<template>
+    <lightning-layout multiple-rows vertical-align="center">
+        <lightning-layout-item size="12" small-device-size="4" medium-device-size="3" class="slds-p-bottom_small">
+            <div class="fontClass">
+                Email
+             </div>
+             <div>
+                <lightning-formatted-text value={email}></lightning-formatted-text>
+             </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="4" medium-device-size="3" class="slds-p-bottom_small">
+             <div class="fontClass">
+                Mobile Number
+             </div>
+            <div>
+                <lightning-formatted-text value={mobileNumber}></lightning-formatted-text>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="4" medium-device-size="3" class="slds-p-bottom_small">
+            <div class="fontClass">
+                Address
+             </div>
+            <div>
+                <lightning-formatted-text value={address} ></lightning-formatted-text>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="4" medium-device-size="3" class="slds-p-bottom_small">
+            <div class="fontClassResume">
+                Resume
+             </div>
+            <div class="buttonCss">
+                <lightning-button label="Download Resume" stretch icon-name="action:download" onclick={handleDownloadResume} class="slds-var-m-left_x-small slds-var-m-bottom_x-small"></lightning-button>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+
+</template>

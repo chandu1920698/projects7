@@ -1,0 +1,21 @@
+<template>
+    <div class="userDetailAndStatsWrapper">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12">
+                <div>
+                    <c-portfolio-user-details 
+                    email={email}
+                    mobile-number={mobileNumber}
+                    address={address}
+                    resume-url={resumeUrl}
+                    ></c-portfolio-user-details>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12">
+                <div class="slds-m-top_medium">
+                    <c-portfolio-user-stats rank={rank} points={points} badges={badges} trails={trails}></c-portfolio-user-stats>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

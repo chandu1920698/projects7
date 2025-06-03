@@ -1,0 +1,123 @@
+<template>
+    <template if:true={showSpinner}>
+        <div class="spinner-center">
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </div>
+    </template>
+    <template if:true={isDesktop}>
+        <!-- <div class="show-on-desktop-view"> -->
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class={centerContainerCss}>
+                        <div class={contactMeTextCss}>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <!-- <div class="c-container"> -->
+                        <div class={centerContainerCss}>
+                            <div class="container">
+                                <form onsubmit={handleSendMessage}>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <lightning-input-rich-text
+                                                value={message}
+                                                onchange={handleInputChange}
+                                                placeholder="Your Message"
+                                                name="message">
+                                            </lightning-input-rich-text>
+                                        </div>
+                                    </div>
+                                    <div class="custom-button">
+                                        <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    <!-- </div> -->
+                </div>
+            </div>
+        <!-- </div> -->
+    </template>
+    
+    <template if:false={isDesktop}>
+        <!-- <div class="show-on-mobile-view"> -->
+            <div class="slds-grid slds-grid_vertical slds-gutters">
+                <div class="slds-col">
+                    <div class={centerContainerCss}>
+                        <div class={contactMeTextCss}>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col">
+                    <div class="c-container">
+                        <div class={centerContainerCss}>
+                            <div class="container">
+                                <form onsubmit={handleSendMessage}>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="text" placeholder="Your Name" required class="slds-input" name="name" value={name} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <input type="email" placeholder="Your Email" required class="slds-input" name="email" value={email} onchange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-var-m-bottom_medium slds-p-left_large slds-p-right_large">
+                                        <div class="slds-form-element__control">
+                                            <lightning-input-rich-text
+                                                value={message}
+                                                onchange={handleInputChange}
+                                                placeholder="Your Message"
+                                                name="message">
+                                            </lightning-input-rich-text>
+                                        </div>
+                                    </div>
+                                    <div class="custom-button">
+                                        <button class="slds-button slds-button_brand slds-var-m-bottom_small" disabled={isButtonDisabled}>Send Message</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </template>
+	
+
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-labelledby="modal-heading-01" aria-modal="true">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <slot name="headercontent">
+                        <h2 class="modal-title">👋 {messageHeaderGreeting} !</h2>
+                    </slot>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <slot name="modal-body">
+                        <p class="modal-text">It's great to hear from you! I truly appreciate your continued interest and the time you've taken to reach out.</p>
+                        <p class="modal-text">Your message has been received, and I will get back to you as soon as possible. If there's anything specific you'd like to discuss, feel free to let me know!</p>
+                        <p class="modal-text">In the meantime, feel free to explore my latest projects and updates. Looking forward to our conversation!</p>
+                    </slot>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand" onclick={handleModalClose}>Close</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

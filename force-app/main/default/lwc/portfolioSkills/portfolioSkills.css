@@ -1,0 +1,43 @@
+h2{
+    background: #16325c;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+ /* Namespace + Scope + Component + Category + Property */
+.slds-badge{
+    --slds-c-badge-color-background:#f6c403;
+    --slds-c-badge-text-color:#000;
+}
+
+.card {
+     min-height: 300px;
+     text-align: center;
+     margin: 1rem;
+     border-radius: 8px;
+}
+
+.card-title {
+    text-align: center;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+.card-elements {
+    margin: 1rem;
+}
+
+.skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spinner-center {
+    top: 56%;
+}

@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Currency Convertor",
+  "contentBody" : {
+    "activeViewId" : "Currency_Convertor",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-currency-convertor",
+    "urlPrefix" : "currency-convertor"
+  },
+  "urlName" : "currency-convertor"
+}

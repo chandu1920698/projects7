@@ -1,0 +1,42 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" class="spinner-center"></lightning-spinner>
+    </template>
+    
+    <template if:true={salesforceCertifications}>
+        <h2 class="slds-text-heading_medium slds-var-m-around_medium">Salesforce Certifications</h2>
+        <lightning-layout multiple-rows class="slds-var-m-around_medium">
+            <template for:each={salesforceCertifications} for:item="certificate">
+                <lightning-layout-item key={certificate.certId} size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                    <div class="card">
+                        <a href={certificate.certUrl} target="_blank" class="image-wrapper">
+                            <img src={certificate.imageUrl} alt={certificate.certName} style="width:100%" class="hover-image">
+                            <template if:true={certificate.certUrl}>
+                                <lightning-icon icon-name='utility:new_window' alternative-text='View in LinkedIn' size='x-small' title='View in LinkedIn'></lightning-icon>
+                            </template>
+                        </a>
+                    </div>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </template>
+    
+    <template if:true={otherCertifications}>
+        <h2 class="slds-text-heading_medium slds-var-m-around_medium">Other Certifications</h2>
+        <lightning-layout multiple-rows class="slds-var-m-around_medium">
+            <template for:each={otherCertifications} for:item="certificate">
+                <lightning-layout-item key={certificate.certId} size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                    <div class="card">
+                        <a href={certificate.certUrl} target="_blank">
+                            <img src={certificate.imageUrl} alt={certificate.certName} style="width:100%">
+                        </a>
+                        <template if:true={certificate.certUrl}>
+                            <lightning-icon icon-name='utility:new_window' alternative-text='View Certificate' size='x-small' title='View Certificate'></lightning-icon>
+                        </template>
+                    </div>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </template>
+    
+</template>

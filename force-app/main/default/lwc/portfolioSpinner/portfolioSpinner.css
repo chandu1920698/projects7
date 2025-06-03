@@ -1,0 +1,18 @@
+.slds-spinner_container {
+    position: absolute;
+    /* margin: 1rem; */
+    top: 2.2rem;
+    /* right: 0; */
+    /* bottom: 0; */
+    height: fit-content;
+    width: fit-content;
+    left: 90%;
+    z-index: 9050;
+    background: #f6c403;
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: opacity .2s ease, visibility 0s;
+    transition: opacity .2s ease, visibility 0s;
+    -webkit-transition-delay: 0s, .3s;
+    transition-delay: 0s, .3s;
+}

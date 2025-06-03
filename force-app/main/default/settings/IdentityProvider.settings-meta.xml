@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdentityProviderSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <certificateName>SelfSignedCert_21Jan2025_053358</certificateName>
+    <enableIdentityProvider>true</enableIdentityProvider>
+</IdentityProviderSettings>

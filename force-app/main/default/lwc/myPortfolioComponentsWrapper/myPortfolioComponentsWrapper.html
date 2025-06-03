@@ -1,0 +1,25 @@
+<template>
+    <template if:true={portfolioBannerData}>
+        <c-my-portfolio-banner portfolio-wrapper-component-data = {portfolioBannerData}
+            linked-in-url={linkedInUrl}
+            leet-code-url={leetCodeUrl}
+            trail-head-url={trailHeadUrl}
+            youtube-url={youtubeUrl}
+            git-hub-url={gitHubUrl}
+            twitter-url={twitterUrl}
+            blog-url={blogUrl}
+        ></c-my-portfolio-banner>
+    
+    </template>
+    
+    <c-portfolio-user-details-and-stats-wrapper 
+        portfolio-wrapper-component-data-trailhead = {portfolioUserTrailHeadStatsData}
+        portfolio-wrapper-component-data-personal = {portfolioUserPersonalDetailsData}
+    ></c-portfolio-user-details-and-stats-wrapper>
+
+
+    <template if:true={recordId}>
+        <c-portfolio-path-wrapper record-id={recordId}>
+        </c-portfolio-path-wrapper>
+    </template>
+</template>

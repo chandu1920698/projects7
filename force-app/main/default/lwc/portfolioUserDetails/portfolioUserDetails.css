@@ -1,0 +1,17 @@
+.fontClass {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.fontClassResume {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+}
+
+.buttonCss {
+    max-width: 70%;
+    position: relative;
+    left: 15%;
+}

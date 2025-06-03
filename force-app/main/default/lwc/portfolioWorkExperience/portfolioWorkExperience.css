@@ -1,0 +1,21 @@
+.spinner-center {
+    top: 56%;
+}
+
+.location {
+    font-style: italic;
+    font-size: 12px;
+    color: #444;
+    overflow-wrap: break-word;
+}
+
+.role {
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 700;
+    overflow-wrap: break-word;
+}
+
+.non-clickable-class {
+    pointer-events: none;
+}

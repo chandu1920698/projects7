@@ -1,0 +1,67 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Weather App",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"15367b7c-d83f-44df-a9d0-227ca6985d29\",\"columns\":[{\"UUID\":\"28ad5ce4-dead-4b04-866b-436b82796c7a\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:weatherApp",
+              "id" : "81a1f419-fd43-4582-8934-a102a56121d6",
+              "type" : "component"
+            } ],
+            "id" : "28ad5ce4-dead-4b04-866b-436b82796c7a",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "15367b7c-d83f-44df-a9d0-227ca6985d29",
+          "type" : "component"
+        } ],
+        "id" : "3d272625-76b4-4be2-93f9-a81b91417cae",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "pageTitle" : "Weather App",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "4f7dbf23-e415-409e-920e-34424c3e2903",
+          "type" : "component"
+        } ],
+        "id" : "60764b1d-48fd-4dc6-be96-321d2c79941d",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "2356202f-ae56-493c-b559-1cc4464fb0f0",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-weather-app"
+  },
+  "urlName" : "weather-app"
+}

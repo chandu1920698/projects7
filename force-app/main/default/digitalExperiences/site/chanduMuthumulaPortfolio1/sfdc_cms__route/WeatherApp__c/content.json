@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Weather App",
+  "contentBody" : {
+    "activeViewId" : "Weather_App",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-weather-app",
+    "urlPrefix" : "weather-app"
+  },
+  "urlName" : "weather-app"
+}

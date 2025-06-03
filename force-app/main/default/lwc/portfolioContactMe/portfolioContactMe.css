@@ -1,0 +1,89 @@
+.custom-button {
+    display: grid;
+    justify-content: center;
+}
+
+.center-container-mobile {
+    display: flex;
+    justify-content: center;  
+    align-items: center;    
+    
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center-container-desktop {
+    display: flex;
+    height: 40rem;    
+
+    display: flex;
+    justify-content: center;  
+    align-items: center;    
+
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-me-text-desktop {
+    max-width: 600px;
+    margin: 10rem auto;
+    padding: 1rem;
+    background: #ffffff;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.contact-me-text-mobile {
+    max-width: 400px;
+    margin: 1rem auto;
+    padding: 1rem;
+    background: #ffffff;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-align: center;
+    padding-top: 1rem;
+    margin-top: 2rem;
+}
+
+form {
+    padding-top: 3.5rem;
+    background: #f2f2f2;
+    border-radius: 8px;
+}
+
+.modal-container {
+    display: inline-grid;
+    justify-items: center;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 16px;
+    color: #444;
+}
+
+.modal-text {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.spinner-center {
+    position: sticky;
+    top: 56%;
+    width: 100%;
+}

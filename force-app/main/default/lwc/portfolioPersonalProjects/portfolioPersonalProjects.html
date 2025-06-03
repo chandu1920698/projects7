@@ -1,0 +1,33 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" class="spinner-center"></lightning-spinner>
+    </template>
+    <div class="project-container slds-m-around_medium">
+        <!-- <lightning-layout multiple-rows horizontal-align="space"> -->
+            <template for:each={projectDetails} for:item="project">
+                <lightning-layout-item key={project.projectName} padding="around-small">
+                    <div class="card">
+                        <lightning-carousel class="custom-carousel" disable-auto-scroll={project.isDisableAutoScroll}>
+                            <template for:each={project.imageUrls} for:item="imageUrl">
+                                <lightning-carousel-image key={imageUrl}
+                                    src = {imageUrl}
+                                    href = "#"
+                                    alternative-text = "Image Text"
+                                    class="non-clickable"
+                                >
+                                </lightning-carousel-image>
+                            </template>
+                        </lightning-carousel>
+                        <div class="slds-button bottom slds-align_absolute-center">{project.projectName}
+                            <span>
+                                <a href={project.projectWebsite}>
+                                    <lightning-icon icon-name='utility:new_window' alternative-text='new_window' size='x-small' title='Open in new window' class="slds-p-left_x-small slds-p-bottom_x-small open-app"></lightning-icon>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </template>
+        <!-- </lightning-layout> -->
+    </div>
+</template>

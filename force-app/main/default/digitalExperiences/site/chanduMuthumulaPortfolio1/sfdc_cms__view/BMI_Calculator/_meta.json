@@ -1,0 +1,5 @@
+{
+  "apiName" : "BMI_Calculator",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}
