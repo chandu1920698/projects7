@@ -124,9 +124,9 @@ export default class MyPortfolioComponentsWrapper extends LightningElement {
             this.recordData = data;
             this.error = undefined;
             let fields = data.fields;
-            console.log('this.recordData -> ', JSON.stringify(this.recordData));
-            console.log('fields -> ', JSON.stringify(fields));
-            console.log('companyName -> ' + fields['CompanyName__c'].value);
+            // console.log('this.recordData -> ', JSON.stringify(this.recordData));
+            // console.log('fields -> ', JSON.stringify(fields));
+            // console.log('companyName -> ' + fields['CompanyName__c'].value);
             this.portfolioBannerData = {
                 companyName : fields['CompanyName__c'].value,
                 companyLocation : fields['CompanyLocation__c'].value,
@@ -150,9 +150,9 @@ export default class MyPortfolioComponentsWrapper extends LightningElement {
                 rangerLevel : fields['RangerLevel__c'].value,
             }
 
-            console.log('this.portfolioBannerData -> ', JSON.stringify(this.portfolioBannerData));
-            console.log('this.portfolioUserPersonalDetailsData -> ', JSON.stringify(this.portfolioUserPersonalDetailsData));
-            console.log('this.portfolioUserTrailHeadStatsData -> ', JSON.stringify(this.portfolioUserTrailHeadStatsData));
+            // console.log('this.portfolioBannerData -> ', JSON.stringify(this.portfolioBannerData));
+            // console.log('this.portfolioUserPersonalDetailsData -> ', JSON.stringify(this.portfolioUserPersonalDetailsData));
+            // console.log('this.portfolioUserTrailHeadStatsData -> ', JSON.stringify(this.portfolioUserTrailHeadStatsData));
 
         } else if(error) {
             this.error = error;

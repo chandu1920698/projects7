@@ -176,7 +176,7 @@ export default class MyPortfolioBanner extends LightningElement {
         // GraphQl
         // let aboutMeFieldValue = this.portfolioWrapperComponentData?.aboutMe?.value;
         let aboutMeFieldValue = this.portfolioWrapperComponentData?.aboutMe;
-        console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
+        // console.log("aboutMeFieldValue -> " + JSON.stringify(aboutMeFieldValue));
         if(this.isDesktop) {
             let aboutMeHtml = this.template.querySelector('.about-me');
             if(aboutMeHtml) {
